@@ -1,4 +1,4 @@
-Ozone Widget Framework
+Kernel
 ======================
 
 Initial Setup
