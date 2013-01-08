@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.ozoneplatform.kernel</groupId>
+        <artifactId>kernel</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <groupId>org.ozoneplatform.kernel.deployment</groupId>
+    <artifactId>deployment</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <name>Ozone :: Kernel :: Kernel Deployment Module</name>
+    <packaging>pom</packaging>
+
+     <properties>
+        <servlet.port>8080</servlet.port>
+        <ozone.kernel.web.context.name>kernel</ozone.kernel.web.context.name>
+        <cargo.container.version>apache-tomcat-7.0.32</cargo.container.version>
+        <cargo-maven2-plugin.version>1.3.0</cargo-maven2-plugin.version>
+        <cargo-container-id.version>tomcat7x</cargo-container-id.version>
+        <cargo-container-zip-url.path>http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.32/bin/${cargo.container.version}.zip</cargo-container-zip-url.path>
+        <cargo-configurations-path>${project.build.directory}/cargo/configurations</cargo-configurations-path>
+        <cargo-assembly-zip.xml.name>generate-cargo-zip.xml</cargo-assembly-zip.xml.name>
+    </properties>
+
+     <dependencies>
+        <dependency>
+            <groupId>${deployable-war-groupId}</groupId>
+            <artifactId>${deployable-war-artifactId}</artifactId>
+            <version>${project.version}</version>
+            <type>war</type>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                  <groupId>org.apache.maven.plugins</groupId>
+                  <artifactId>maven-resources-plugin</artifactId>
+                  <version>2.6</version>
+                </plugin>
+                <plugin>
+                  <groupId>org.codehaus.cargo</groupId>
+                  <artifactId>cargo-maven2-plugin</artifactId>
+                  <version>${cargo-maven2-plugin.version}</version>
+                  <configuration>
+                      <!-- Container configuration -->
+                      <container>
+                        <containerId>${cargo-container-id.version}</containerId>
+                      </container>
+                      <configuration>
+                          <type>standalone</type>
+                          <home>${cargo-configurations-path}</home>
+                          <properties>
+                            <cargo.servlet.port>${servlet.port}</cargo.servlet.port>
+                          </properties>
+                      </configuration>
+                      <!-- Deploy WAR into Cargo -->
+                      <deployables>
+                          <deployable>
+                            <groupId>${deployable-war-groupId}</groupId>
+                            <artifactId>${deployable-war-artifactId}</artifactId>
+                            <type>war</type>
+                            <properties>
+                              <context>${ozone.kernel.web.context.name}</context>
+                            </properties>
+                          </deployable>
+                        </deployables>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <!-- Place deployable WAR into ZIP -->
+            <plugin>
+                <groupId>org.codehaus.cargo</groupId>
+                <artifactId>cargo-maven2-plugin</artifactId>
+                <version>${cargo-maven2-plugin.version}</version>
+                <executions>
+                  <execution>
+                    <id>deploy-cargo</id>
+                    <phase>package</phase>
+                    <goals>
+                      <goal>configure</goal>
+                    </goals>
+                  </execution>
+                </executions>
+            </plugin>
+            <!-- Move files where they need to go -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.6</version>
+                <executions>
+                  <execution>
+                    <id>copy-resources</id>
+                    <phase>package</phase>
+                    <goals>
+                      <goal>copy-resources</goal>
+                    </goals>
+                    <configuration>
+                        <outputDirectory>${project.build.directory}/cargo/installs/${cargo.container.version}/${cargo.container.version}</outputDirectory>
+                        <resources>
+                            <!-- COPY CONF DIR CONIFGS -->
+                            <resource>
+                                <directory>${project.build.directory}/cargo/configurations</directory>
+                                <includes> 
+                                    <include>**/*.*</include> 
+                                </includes>
+                                <excludes>
+                                  <exclude>webapps/*manager</exclude>
+                                </excludes>
+                            </resource>
+                            <!-- COPY CUSTOM CONFIGS -->          
+                            <resource>
+                                <directory>${project.basedir}/src/${cargo-container-id.version}/custom</directory>
+                                <includes> 
+                                    <include>**/*.*</include> 
+                                </includes>
+                            </resource>
+                        </resources>
+                        <overwrite>true</overwrite>
+                    </configuration>            
+                  </execution>
+                </executions>
+            </plugin>
+            <!-- Assemble the ZIP Distribution -->
+            <plugin> 
+            <artifactId>maven-assembly-plugin</artifactId> 
+            <configuration> 
+              <appendAssemblyId>false</appendAssemblyId>
+              <descriptors> 
+                <descriptor>src/assembly/${cargo-assembly-zip.xml.name}</descriptor> 
+              </descriptors> 
+              <finalName>${project.artifactId}-${project.version}</finalName>
+            </configuration> 
+            <executions> 
+              <execution> 
+                <id>make-assembly</id> 
+                <phase>package</phase> 
+                <goals> 
+                  <goal>attached</goal> 
+                </goals> 
+              </execution> 
+            </executions>         
+          </plugin> 
+        </plugins>
+    </build>
+    <!-- Here we have cargo profiles.. -->
+    <profiles>
+        <profile>
+          <id>${cargo-container-id.version}</id>
+          <activation>
+            <activeByDefault>true</activeByDefault>
+          </activation>
+          <build>
+            <pluginManagement>
+              <plugins>
+                <plugin>
+                  <groupId>org.codehaus.cargo</groupId>
+                  <artifactId>cargo-maven2-plugin</artifactId>
+                  <configuration>
+                    <container>
+                      <containerId>${cargo-container-id.version}</containerId>
+                      <zipUrlInstaller>
+                        <url>${cargo-container-zip-url.path}</url>
+                      </zipUrlInstaller>
+                    </container>
+                    <!-- Add Tomcat 7 Specific Overrides to configuration -->
+                    <configuration>
+                          <configfiles>
+                            <!-- BIN DIRECTORY -->
+                            <configfile>
+                              <file>${project.basedir}/src/${cargo-container-id.version}/overrides/bin/setenv.bat</file>
+                              <todir>bin</todir>
+                            </configfile>
+                            <configfile>
+                              <file>${project.basedir}/src/${cargo-container-id.version}/overrides/bin/setenv.sh</file>
+                              <todir>bin</todir>
+                            </configfile>
+                            <!-- CONF DIRECTORY -->
+                            <configfile>
+                              <file>${project.basedir}/src/${cargo-container-id.version}/overrides/conf/tomcat-users.xml</file>
+                              <todir>conf</todir>
+                            </configfile>
+                            <!-- LOGS DIRECTORY -->
+                            <!-- TEMP DIRECTORY -->
+                           </configfiles>
+                    </configuration>
+                  </configuration>
+                </plugin>
+              </plugins>
+            </pluginManagement>
+          </build>
+        </profile>
+    </profiles>
+
+</project>
