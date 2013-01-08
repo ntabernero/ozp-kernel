@@ -20,6 +20,7 @@
     <description>see README.md</description>
 
     <modules>
+        <module>modules</module>
         <module>distribution</module>
         <module>web</module>
         <module>deployment</module>
