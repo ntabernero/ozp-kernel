@@ -121,7 +121,7 @@
                                 </descriptor>
 
                                 <!-- Bundletracker Features -->
-                                <!--<descriptor>mvn:org.ozoneplatform.kernel.bundletracker/bundletracker/${project.version}/xml/features</descriptor>-->
+                                <descriptor>mvn:org.ozoneplatform.kernel.bundles.server/bundletracker/${project.version}/xml/features</descriptor>
 
                                 <!-- ATMOSPHERE Features -->
                                 <!--<descriptor>mvn:ozone.vision.atmosphere.features/rest-cxf/${project.version}/xml/features</descriptor>-->
@@ -149,7 +149,7 @@
                                 <feature>patch</feature>
 
                                 <!-- Bundletracker -->
-                                <!--<feature>ozone-vision-bundletracker</feature>-->
+                                <feature>bundletracker</feature>
 
                             </features>
                             <includeMvnBasedDescriptors>true</includeMvnBasedDescriptors>

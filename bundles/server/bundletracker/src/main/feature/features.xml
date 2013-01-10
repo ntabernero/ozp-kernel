@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<features name="org.ozoneplatform.kernel.bundles.server.bundletracker-repo">
+   
+    <feature name="bundletracker" version="${project.version}" description="${project.description}">
+        <bundle start-level="80">mvn:org.ozoneplatform.kernel.bundles.server/bundletracker/${project.version}</bundle>
+    </feature>
+
+</features>

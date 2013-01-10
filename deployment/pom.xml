@@ -30,8 +30,8 @@
 
      <dependencies>
         <dependency>
-            <groupId>${deployable-war-groupId}</groupId>
-            <artifactId>${deployable-war-artifactId}</artifactId>
+            <groupId>org.ozoneplatform.kernel</groupId>
+            <artifactId>web</artifactId>
             <version>${project.version}</version>
             <type>war</type>
         </dependency>
@@ -64,8 +64,8 @@
                       <!-- Deploy WAR into Cargo -->
                       <deployables>
                           <deployable>
-                            <groupId>${deployable-war-groupId}</groupId>
-                            <artifactId>${deployable-war-artifactId}</artifactId>
+                            <groupId>org.ozoneplatform.kernel</groupId>
+                            <artifactId>web</artifactId>
                             <type>war</type>
                             <properties>
                               <context>${ozone.kernel.web.context.name}</context>

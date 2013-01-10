@@ -48,7 +48,7 @@
                                 <descriptor>mvn:org.fusesource.fabric/fuse-fabric/${fabric.version}/xml/features</descriptor>
                             
                                 <!-- Bundletracker Features -->
-                                <!--<descriptor>mvn:org.ozoneplatform.kernel.bundletracker/bundletracker/${project.version}/xml/features</descriptor>-->
+                                <descriptor>mvn:org.ozoneplatform.kernel.bundles.server/bundletracker/${project.version}/xml/features</descriptor>
 
                                 <!-- ATMOSPHERE Features -->
                                 <!--<descriptor>mvn:ozone.vision.atmosphere.features/rest-cxf/${project.version}/xml/features</descriptor>-->
