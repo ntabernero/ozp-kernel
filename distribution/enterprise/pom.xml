@@ -50,6 +50,9 @@
                                 <!-- Bundletracker Features -->
                                 <descriptor>mvn:org.ozoneplatform.kernel.bundles.server/bundletracker/${project.version}/xml/features</descriptor>
 
+                                <!-- OWF Features -->
+                                <descriptor>mvn:org.ozoneplatform.owf/features/${project.version}/xml/features</descriptor>
+
                                 <!-- ATMOSPHERE Features -->
                                 <!--<descriptor>mvn:ozone.vision.atmosphere.features/rest-cxf/${project.version}/xml/features</descriptor>-->
                             </descriptors>
