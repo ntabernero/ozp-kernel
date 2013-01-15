@@ -165,6 +165,31 @@
     </scm>
 
     <repositories>
+        <!--these need to be here if build with out the ozoneplatform parent project-->
+        <repository>
+            <id>ozone.release</id>
+            <name>Ozone Community Release Repository</name>
+            <url>https://www.owfgoss.org/nexus/content/repositories/releases</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+        <repository>
+            <id>ozone.snapshot</id>
+            <name>Ozone Community Snapshot Repository</name>
+            <url>https://www.owfgoss.org/nexus/content/repositories/snapshots</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </repository>
+        <!--these need to be here if build with out the ozoneplatform parent project-->
+
         <repository>
             <id>repo1.maven</id>
             <name>Maven Central Repo</name>
