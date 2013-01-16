@@ -5,7 +5,14 @@
     <format>zip</format> 
   </formats> 
   <fileSets>
-    <fileSet> 
+    <fileSet>
+      <outputDirectory>.</outputDirectory>
+      <directory>${project.basedir}/src/assembly/custom</directory>
+      <includes>
+        <include>**/*.*</include>
+      </includes>
+	</fileSet>
+	<fileSet> 
       <directory>${project.build.directory}/cargo/installs/${cargo.container.version}/${cargo.container.version}</directory> 
       <outputDirectory>${cargo.container.version}</outputDirectory> 
       <includes> 
