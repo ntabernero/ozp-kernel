@@ -16,6 +16,7 @@
     <name>OzonePlatform :: Kernel :: Bundles :: Server</name>
 
     <modules>
+        <module>atmosphere</module>
         <module>bundletracker</module>
     </modules>
 </project>
