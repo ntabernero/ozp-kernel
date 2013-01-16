@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<features name="org.ozoneplatform.kernel.features-repo">
+
+    <feature name="bundletracker" version="${project.version}" description="${bundletracker.description}">
+        <bundle start-level="80">mvn:org.ozoneplatform.kernel.bundles.server/bundletracker/${project.version}</bundle>
+    </feature>
+
+    <feature name="atmospherebus" version="${project.version}" description="${atmospherebus.description}">
+        <!-- Dependencies -->
+        <bundle dependency="true">mvn:org.atmosphere/atmosphere-runtime/${atmosphere.version}</bundle>
+        <bundle></bundle>
+
+        <!-- Core -->
+        <bundle start-level="80">mvn:org.ozoneplatform.kernel.bundles.server.atmosphere/atmospherebus/${project.version}</bundle>
+    </feature>
+
+</features>
