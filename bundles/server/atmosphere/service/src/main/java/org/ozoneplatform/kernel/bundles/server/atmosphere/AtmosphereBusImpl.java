@@ -14,6 +14,7 @@
 package org.ozoneplatform.kernel.bundles.server.atmosphere;
 
 
+import org.atmosphere.cache.HeaderBroadcasterCache;
 import org.atmosphere.config.service.MeteorService;
 import org.atmosphere.handler.ReflectorServletProcessor;
 import org.atmosphere.websocket.WebSocketEventListenerAdapter;
@@ -26,13 +27,22 @@ import org.atmosphere.interceptor.BroadcastOnPostAtmosphereInterceptor;
 import org.atmosphere.interceptor.HeartbeatInterceptor;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceReference;
+import org.osgi.framework.ServiceRegistration;
 import org.ozoneplatform.kernel.bundles.server.atmosphere.api.AtmosphereBus;
+import org.ops4j.pax.web.extender.whiteboard.ExtenderConstants;
+import org.ops4j.pax.web.service.WebContainerConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.osgi.service.log.LogService;
+import org.codehaus.jackson.map.ObjectMapper;
 
 import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Hashtable;
 import java.util.List;
 
+import javax.servlet.Servlet;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -49,23 +59,25 @@ import java.io.IOException;
  * To change this template use File | Settings | File Templates.
  */
 
-class AtmosphereBusImpl extends AtmosphereServlet implements AtmosphereBus, BundleActivator {
+public class AtmosphereBusImpl implements AtmosphereBus, BundleActivator {
 
-    protected static final Logger logger = LoggerFactory.getLogger(AtmosphereBusImpl.class);
+    protected LoggerService loggerService;
 
-    private String mapping;
+    public static final String METEOR_PUB_SUB_SERVLET_NAME = "KernelAtmosphereMeteorPubSubServlet";
+    public static final String METEOR_PUB_SUB_CONTEXT_ID = "pubsub";
+    public static final String METEOR_PUB_SUB_MAPPING = "/" + METEOR_PUB_SUB_CONTEXT_ID;
 
-    private final List<AtmosphereInterceptor> interceptors = new ArrayList<AtmosphereInterceptor>();
+    private ServiceRegistration m_meteorPubSubServletReg;
+
+    private final AtmosphereFramework framework;
 
     private BundleContext context;
 
     public AtmosphereBusImpl() {
-        this(false);
-    }
+        //Instantiate the AtmosphereFramework
+        framework = new AtmosphereFramework(false, false);
+     }
 
-    public AtmosphereBusImpl(boolean isFilter) {
-        super(isFilter, false);
-    }
 
     // ----------------------------
     //   BundleActivator impl.
@@ -73,31 +85,31 @@ class AtmosphereBusImpl extends AtmosphereServlet implements AtmosphereBus, Bund
     public void start(BundleContext bundleContext) throws Exception {
          this.context = bundleContext;
 
-         if(mapping == null){
-             mapping = DEFAULT_MAPPING;
-         }
-        logger.info("Have AtmosphereBusImpl {} mapped to {}", mapping);
+        loggerService = new LoggerService(AtmosphereBusImpl.class, context);
 
-        //Add Interceptors....
-            // for pushing messages to suspended connection
-        interceptors.add(new BroadcastOnPostAtmosphereInterceptor());
-            // for managing the connection lifecycle
-        interceptors.add(new AtmosphereResourceLifecycleInterceptor());
-            // for making sure messages are delivered entirely
-        interceptors.add(new TrackMessageSizeInterceptor());
-            // for keeping the connection active
-        interceptors.add(new HeartbeatInterceptor());
+        //for caching message.
+        framework.setBroadcasterCacheClassName(HeaderBroadcasterCache.class.getName());
 
          //Register HTTP Servlet via whiteboard...
         //Wire up MeteorPubSub servlet
-        //Wire up MeteorSerlvet to point to this MeteorPubSub
+        //Dictionary props = new Hashtable();
+        //props.put( ExtenderConstants.PROPERTY_ALIAS, METEOR_PUB_SUB_MAPPING );
+        //props.put( ExtenderConstants.PROPERTY_HTTP_CONTEXT_ID, METEOR_PUB_SUB_CONTEXT_ID );
+        //props.put( WebContainerConstants.SERVLET_NAME, METEOR_PUB_SUB_SERVLET_NAME );
+        //Init Params
+            /*  You can force this Servlet to use native API of the Web Server instead of
+             *  the Servlet 3.0 Async API you are deploying on by adding  */
+        //props.put( "org.atmosphere.useNative" ,true);
+        //m_meteorPubSubServletReg = bundleContext.registerService( Servlet.class.getName(), new MeteorPubSub(), props );
 
-
-
-    }
+        loggerService.log(LogService.LOG_INFO, "[AtmosphereBusImpl]: Registered '" + METEOR_PUB_SUB_SERVLET_NAME + "' {} " + METEOR_PUB_SUB_MAPPING);
+     }
 
     public void stop(BundleContext bundleContext) throws Exception {
-
+        removeAtmosphereHandler(METEOR_PUB_SUB_MAPPING);
+        //m_meteorPubSubServletReg.unregister();
+        //m_meteorPubSubServletReg = null;
+        loggerService.log(LogService.LOG_INFO, "[AtmosphereBusImpl]: Unregistered '" + METEOR_PUB_SUB_SERVLET_NAME + "' {} " + METEOR_PUB_SUB_MAPPING);
     }
 
     // ----------------------------
@@ -148,62 +160,14 @@ class AtmosphereBusImpl extends AtmosphereServlet implements AtmosphereBus, Bund
      * @return the correct mapping.
      */
     private String constructMapping(String hMapping){
-        return (mapping.equals("/") ? "" : mapping) + (hMapping.startsWith("/") ? hMapping : "/" + hMapping);
+        return (METEOR_PUB_SUB_MAPPING.equals("/") ? "" : METEOR_PUB_SUB_MAPPING) + (hMapping.startsWith("/") ? hMapping : "/" + hMapping);
     }
 
-
-    @Override
-    public void init(final ServletConfig sc) throws ServletException {
-        super.init(sc);
-
-        ReflectorServletProcessor r = new ReflectorServletProcessor();
-        r.setServletClassName(MeteorPubSub.class.getName());
-
-        addAtmosphereHandler(mapping, r, interceptors);
-        framework.initAtmosphereHandler(sc);
+    public ServiceRegistration getM_meteorPubSubServletReg() {
+        return m_meteorPubSubServletReg;
     }
 
-    @Override
-    public void destroy() {
-        super.destroy();
-        Meteor.cache.clear();
+    public void setM_meteorPubSubServletReg(ServiceRegistration m_meteorPubSubServletReg) {
+        this.m_meteorPubSubServletReg = m_meteorPubSubServletReg;
     }
-
-
-    @MeteorService
-    protected class MeteorPubSub extends HttpServlet {
-
-        @Override
-        public void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException {
-            // Create a Meteor
-            Meteor m = Meteor.build(req);
-
-            // Log all events on the console, including WebSocket events.
-            m.addListener(new WebSocketEventListenerAdapter());
-
-            res.setContentType("text/html;charset=ISO-8859-1");
-
-            Broadcaster b = lookupBroadcaster(req.getPathInfo());
-            m.setBroadcaster(b);
-
-            m.suspend(-1);
-        }
-
-        public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException {
-            Broadcaster b = lookupBroadcaster(req.getPathInfo());
-
-            String message = req.getReader().readLine();
-
-            if (message != null && message.indexOf("message") != -1) {
-                b.broadcast(message.substring("message=".length()));
-            }
-        }
-
-        Broadcaster lookupBroadcaster(String pathInfo) {
-            String[] decodedPath = pathInfo.split("/");
-            Broadcaster b = BroadcasterFactory.getDefault().lookup(decodedPath[decodedPath.length - 1], true);
-            return b;
-        }
-    }
-
 }

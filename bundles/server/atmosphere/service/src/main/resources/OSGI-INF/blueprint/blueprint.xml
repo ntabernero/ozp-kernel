@@ -1,0 +1,42 @@
+<!--
+  Copyright (C) FuseSource, Inc.
+  http://fusesource.com
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="
+           http://www.osgi.org/xmlns/blueprint/v1.0.0
+           http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+           ">
+
+    <!-- Use Pax Web WhiteBoard ..-->
+    <service id="meteorPubSubServlet" interface="javax.servlet.http.HttpServlet">
+        <service-properties>
+            <entry key="urlPatterns" value="/pubsub/*"/>
+            <entry key="servlet-name" value="KernelAtmosphereMeteorPubSubServlet"/>
+            <!--<entry key="httpContext.id" value="pubsub"/>-->
+        </service-properties>
+        <bean class="org.ozoneplatform.kernel.bundles.server.atmosphere.MeteorPubSub">
+            <property name="bundleContext" ref="blueprintBundleContext"/>
+        </bean>
+    </service>
+
+    <bean id="atmosphereBusImpl" class="org.ozoneplatform.kernel.bundles.server.atmosphere.AtmosphereBusImpl">
+        <property name="m_meteorPubSubServletReg" ref="meteorPubSubServlet"/>
+    </bean>
+
+    <service ref="atmosphereBusImpl" interface="org.ozoneplatform.kernel.bundles.server.atmosphere.api.AtmosphereBus"/>
+
+</blueprint>
