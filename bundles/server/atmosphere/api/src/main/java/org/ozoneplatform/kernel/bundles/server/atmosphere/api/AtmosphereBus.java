@@ -31,10 +31,6 @@ import java.util.List;
  * Thanks to this bus you can add AtmosphereHandler and get the BroadcasterFactory at runtime.
  */
 public interface AtmosphereBus {
-    static String MAPPING = "org.atmosphere.mapping";
-    static String INTERCEPTORS = "org.atmosphere.interceptors";
-    static String BROADCASTER = "org.atmosphere.broadcaster";
-    static String DEFAULT_MAPPING = "/pubsub";
 
     /**
      * @return The AtmosphereFramework default BroadcasterFactory.

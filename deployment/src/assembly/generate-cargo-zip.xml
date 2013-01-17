@@ -1,0 +1,16 @@
+<assembly> 
+  <id>${cargo.container.version}</id>
+  <includeBaseDirectory>false</includeBaseDirectory> 
+  <formats> 
+    <format>zip</format> 
+  </formats> 
+  <fileSets>
+    <fileSet>
+      <directory>${project.build.directory}/cargo/installs/${cargo.container.version}/${cargo.container.version}</directory> 
+      <outputDirectory>${cargo.container.version}</outputDirectory> 
+      <includes> 
+        <include>**/*.*</include> 
+      </includes> 
+    </fileSet> 
+  </fileSets> 
+</assembly> 
