@@ -21,13 +21,20 @@
            http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
            ">
 
-    <!--
-      We are using the OSGi Blueprint XML syntax to define a bean that we referred to in our JAX-RS server setup.
-      This bean carries a set of JAX-RS annotations that allow its methods to be mapped to incoming requests.
-    -->
+    <!-- Use Pax Web WhiteBoard ..-->
+    <service id="meteorPubSubServlet" interface="javax.servlet.http.HttpServlet">
+        <service-properties>
+            <entry key="urlPatterns" value="/pubsub/*"/>
+            <entry key="servlet-name" value="KernelAtmosphereMeteorPubSubServlet"/>
+            <!--<entry key="httpContext.id" value="pubsub"/>-->
+        </service-properties>
+        <bean class="org.ozoneplatform.kernel.bundles.server.atmosphere.MeteorPubSub">
+            <property name="bundleContext" ref="blueprintBundleContext"/>
+        </bean>
+    </service>
 
     <bean id="atmosphereBusImpl" class="org.ozoneplatform.kernel.bundles.server.atmosphere.AtmosphereBusImpl">
-        <property name="mapping" value="/pubsub"/>
+        <property name="m_meteorPubSubServletReg" ref="meteorPubSubServlet"/>
     </bean>
 
     <service ref="atmosphereBusImpl" interface="org.ozoneplatform.kernel.bundles.server.atmosphere.api.AtmosphereBus"/>

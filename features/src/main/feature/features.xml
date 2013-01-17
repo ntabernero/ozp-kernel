@@ -9,10 +9,12 @@
     <feature name="atmospherebus" version="${project.version}" description="${atmospherebus.description}">
         <!-- Dependencies -->
         <bundle dependency="true">mvn:org.atmosphere/atmosphere-runtime/${atmosphere.version}</bundle>
-        <bundle></bundle>
+        <bundle dependency="true">mvn:org.mortbay.jetty/jetty-util/${jetty6-version}</bundle>
+        <bundle dependency="true">mvn:org.apache.geronimo.specs/geronimo-servlet_3.0_spec/${geronimo3.servlet.version}</bundle>
 
         <!-- Core -->
-        <bundle start-level="80">mvn:org.ozoneplatform.kernel.bundles.server.atmosphere/atmospherebus/${project.version}</bundle>
+        <bundle start-level="80">mvn:org.ozoneplatform.kernel.bundles.server.atmosphere.api/atmospherebus-api/${project.version}</bundle>
+        <bundle start-level="80">mvn:org.ozoneplatform.kernel.bundles.server.atmosphere/atmospherebus-service/${project.version}</bundle>
     </feature>
 
 </features>
