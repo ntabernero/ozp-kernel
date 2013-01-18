@@ -41,36 +41,32 @@
         <pluginManagement>
             <plugins>
                 <plugin>
-                  <groupId>org.apache.maven.plugins</groupId>
-                  <artifactId>maven-resources-plugin</artifactId>
-                  <version>2.6</version>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>2.6</version>
                 </plugin>
                 <plugin>
-                  <groupId>org.codehaus.cargo</groupId>
-                  <artifactId>cargo-maven2-plugin</artifactId>
-                  <version>${cargo-maven2-plugin.version}</version>
-                  <configuration>
-                      <!-- Container configuration -->
-                      <container>
-                        <containerId>${cargo-container-id.version}</containerId>
-                      </container>
-                      <configuration>
-                          <type>standalone</type>
-                          <home>${cargo-configurations-path}</home>
-                          <properties>
-                            <cargo.servlet.port>${servlet.port}</cargo.servlet.port>
-                          </properties>
-                      </configuration>
-                      <!-- Deploy WAR into Cargo -->
-                      <deployables>
-                          <deployable>
-                            <groupId>org.ozoneplatform.kernel</groupId>
-                            <artifactId>web</artifactId>
-                            <type>war</type>
+                    <groupId>org.codehaus.cargo</groupId>
+                    <artifactId>cargo-maven2-plugin</artifactId>
+                    <version>${cargo-maven2-plugin.version}</version>
+                    <configuration>
+                        <configuration>
+                            <type>standalone</type>
+                            <home>${cargo-configurations-path}</home>
                             <properties>
-                              <context>${ozone.kernel.web.context.name}</context>
+                                <cargo.servlet.port>${servlet.port}</cargo.servlet.port>
                             </properties>
-                          </deployable>
+                        </configuration>
+                        <!-- Deploy WAR into Cargo -->
+                        <deployables>
+                            <deployable>
+                                <groupId>org.ozoneplatform.kernel</groupId>
+                                <artifactId>web</artifactId>
+                                <type>war</type>
+                                <properties>
+                                    <context>${ozone.kernel.web.context.name}</context>
+                                </properties>
+                            </deployable>
                         </deployables>
                     </configuration>
                 </plugin>
@@ -152,7 +148,7 @@
           </plugin> 
         </plugins>
     </build>
-    <!-- Here we have cargo profiles.. -->
+    <!-- Here we have profiles for different app servers (only tomcat for now).. -->
     <profiles>
         <profile>
           <id>${cargo-container-id.version}</id>
@@ -172,33 +168,38 @@
                         <url>${cargo-container-zip-url.path}</url>
                       </zipUrlInstaller>
                     </container>
-                    <!-- Add Tomcat 7 Specific Overrides to configuration -->
-                    <configuration>
-                          <configfiles>
-                            <!-- BIN DIRECTORY -->
-                            <configfile>
-                              <file>${project.basedir}/src/${cargo-container-id.version}/overrides/bin/setenv.bat</file>
-                              <todir>bin</todir>
-                            </configfile>
-                            <configfile>
-                              <file>${project.basedir}/src/${cargo-container-id.version}/overrides/bin/setenv.sh</file>
-                              <todir>bin</todir>
-                            </configfile>
-                            <!-- CONF DIRECTORY -->
-                            <configfile>
-                              <file>${project.basedir}/src/${cargo-container-id.version}/overrides/conf/tomcat-users.xml</file>
-                              <todir>conf</todir>
-                            </configfile>
-                            <!-- LOGS DIRECTORY -->
-                            <!-- TEMP DIRECTORY -->
-                           </configfiles>
-                    </configuration>
                   </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>2.6</version>
+                    <executions>
+                      <execution>
+                        <id>copy-overrides</id>
+                        <phase>package</phase>
+                        <goals>
+                          <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/cargo/installs/${cargo.container.version}/${cargo.container.version}</outputDirectory>
+                            <resources>
+                                <!-- COPY OVERRIDING FILES -->
+                                <resource>
+                                    <directory>${project.basedir}/src/${cargo-container-id.version}/overrides</directory>
+                                    <includes>
+                                        <include>**/*</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                            <overwrite>true</overwrite>
+                        </configuration>            
+                      </execution>
+                    </executions>
                 </plugin>
               </plugins>
             </pluginManagement>
           </build>
         </profile>
     </profiles>
-
 </project>
