@@ -7,7 +7,7 @@
     <fileSets>
         <fileSet>
             <outputDirectory>.</outputDirectory>
-            <directory>${project.basedir}/src/assembly/custom</directory>
+            <directory>${project.basedir}/src/main/assembly/custom</directory>
             <includes>
                 <include>**/*</include>
             </includes>

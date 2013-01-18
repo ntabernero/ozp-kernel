@@ -79,13 +79,13 @@
                 <artifactId>cargo-maven2-plugin</artifactId>
                 <version>${cargo-maven2-plugin.version}</version>
                 <executions>
-                  <execution>
-                    <id>deploy-cargo</id>
-                    <phase>package</phase>
-                    <goals>
-                      <goal>configure</goal>
-                    </goals>
-                  </execution>
+                    <execution>
+                        <id>deploy-cargo</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>configure</goal>
+                        </goals>
+                    </execution>
                 </executions>
             </plugin>
             <!-- Move files where they need to go -->
@@ -94,112 +94,112 @@
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>2.6</version>
                 <executions>
-                  <execution>
-                    <id>copy-resources</id>
-                    <phase>package</phase>
-                    <goals>
-                      <goal>copy-resources</goal>
-                    </goals>
-                    <configuration>
-                        <outputDirectory>${project.build.directory}/cargo/installs/${cargo.container.version}/${cargo.container.version}</outputDirectory>
-                        <resources>
-                            <!-- COPY CONF DIR CONIFGS -->
-                            <resource>
-                                <directory>${project.build.directory}/cargo/configurations</directory>
-                                <includes> 
-                                    <include>**/*.*</include> 
-                                </includes>
-                                <excludes>
-                                  <exclude>webapps/*manager</exclude>
-                                </excludes>
-                            </resource>
-                            <!-- COPY CUSTOM CONFIGS -->          
-                            <resource>
-                                <directory>${project.basedir}/src/${cargo-container-id.version}/custom</directory>
-                                <includes> 
-                                    <include>**/*.*</include> 
-                                </includes>
-                            </resource>
-                        </resources>
-                        <overwrite>true</overwrite>
-                    </configuration>            
-                  </execution>
-                </executions>
-            </plugin>
-            <!-- Assemble the ZIP Distribution -->
-            <plugin> 
-            <artifactId>maven-assembly-plugin</artifactId> 
-            <configuration> 
-              <appendAssemblyId>false</appendAssemblyId>
-              <descriptors> 
-                <descriptor>src/assembly/${cargo-assembly-zip.xml.name}</descriptor> 
-              </descriptors> 
-              <finalName>${project.artifactId}-${project.version}</finalName>
-            </configuration> 
-            <executions> 
-              <execution> 
-                <id>make-assembly</id> 
-                <phase>package</phase> 
-                <goals> 
-                  <goal>attached</goal> 
-                </goals> 
-              </execution> 
-            </executions>         
-          </plugin> 
-        </plugins>
-    </build>
-    <!-- Here we have profiles for different app servers (only tomcat for now).. -->
-    <profiles>
-        <profile>
-          <id>${cargo-container-id.version}</id>
-          <activation>
-            <activeByDefault>true</activeByDefault>
-          </activation>
-          <build>
-            <pluginManagement>
-              <plugins>
-                <plugin>
-                  <groupId>org.codehaus.cargo</groupId>
-                  <artifactId>cargo-maven2-plugin</artifactId>
-                  <configuration>
-                    <container>
-                      <containerId>${cargo-container-id.version}</containerId>
-                      <zipUrlInstaller>
-                        <url>${cargo-container-zip-url.path}</url>
-                      </zipUrlInstaller>
-                    </container>
-                  </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-resources-plugin</artifactId>
-                    <version>2.6</version>
-                    <executions>
-                      <execution>
-                        <id>copy-overrides</id>
+                    <execution>
+                        <id>copy-resources</id>
                         <phase>package</phase>
                         <goals>
-                          <goal>copy-resources</goal>
+                            <goal>copy-resources</goal>
                         </goals>
                         <configuration>
                             <outputDirectory>${project.build.directory}/cargo/installs/${cargo.container.version}/${cargo.container.version}</outputDirectory>
                             <resources>
-                                <!-- COPY OVERRIDING FILES -->
+                                <!-- COPY CONF DIR CONIFGS -->
                                 <resource>
-                                    <directory>${project.basedir}/src/${cargo-container-id.version}/overrides</directory>
-                                    <includes>
-                                        <include>**/*</include>
+                                    <directory>${project.build.directory}/cargo/configurations</directory>
+                                    <includes> 
+                                        <include>**/*.*</include> 
+                                    </includes>
+                                    <excludes>
+                                        <exclude>webapps/*manager</exclude>
+                                    </excludes>
+                                </resource>
+                                <!-- COPY CUSTOM CONFIGS -->          
+                                <resource>
+                                    <directory>${project.basedir}/src/main/${cargo-container-id.version}/custom</directory>
+                                    <includes> 
+                                        <include>**/*.*</include> 
                                     </includes>
                                 </resource>
                             </resources>
                             <overwrite>true</overwrite>
                         </configuration>            
-                      </execution>
-                    </executions>
-                </plugin>
-              </plugins>
-            </pluginManagement>
-          </build>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- Assemble the ZIP Distribution -->
+            <plugin> 
+                <artifactId>maven-assembly-plugin</artifactId> 
+                <configuration> 
+                    <appendAssemblyId>false</appendAssemblyId>
+                    <descriptors> 
+                        <descriptor>src/main/assembly/${cargo-assembly-zip.xml.name}</descriptor> 
+                    </descriptors> 
+                    <finalName>${project.artifactId}-${project.version}</finalName>
+                </configuration> 
+                <executions> 
+                    <execution> 
+                        <id>make-assembly</id> 
+                        <phase>package</phase> 
+                        <goals> 
+                            <goal>attached</goal> 
+                        </goals> 
+                    </execution> 
+                </executions>         
+            </plugin> 
+        </plugins>
+    </build>
+    <!-- Here we have profiles for different app servers (only tomcat for now).. -->
+    <profiles>
+        <profile>
+            <id>${cargo-container-id.version}</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>org.codehaus.cargo</groupId>
+                            <artifactId>cargo-maven2-plugin</artifactId>
+                            <configuration>
+                                <container>
+                                    <containerId>${cargo-container-id.version}</containerId>
+                                    <zipUrlInstaller>
+                                        <url>${cargo-container-zip-url.path}</url>
+                                    </zipUrlInstaller>
+                                </container>
+                            </configuration>
+                        </plugin>
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-resources-plugin</artifactId>
+                            <version>2.6</version>
+                            <executions>
+                                <execution>
+                                    <id>copy-overrides</id>
+                                    <phase>package</phase>
+                                    <goals>
+                                        <goal>copy-resources</goal>
+                                    </goals>
+                                    <configuration>
+                                        <outputDirectory>${project.build.directory}/cargo/installs/${cargo.container.version}/${cargo.container.version}</outputDirectory>
+                                        <resources>
+                                            <!-- COPY OVERRIDING FILES -->
+                                            <resource>
+                                                <directory>${project.basedir}/src/main/${cargo-container-id.version}/overrides</directory>
+                                                <includes>
+                                                    <include>**/*</include>
+                                                </includes>
+                                            </resource>
+                                        </resources>
+                                        <overwrite>true</overwrite>
+                                    </configuration>            
+                                </execution>
+                            </executions>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
         </profile>
     </profiles>
 </project>
