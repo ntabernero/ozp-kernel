@@ -21,22 +21,19 @@
            http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
            ">
 
-    <!-- Use Pax Web WhiteBoard ..-->
-    <service id="meteorPubSubServlet" interface="javax.servlet.http.HttpServlet">
+
+    <bean id="atmosphereBusService" class="org.ozoneplatform.kernel.bundles.server.atmosphere.service.AtmosphereBusMainServiceServlet"/>
+
+    <service ref="atmosphereBusService" interface="org.ozoneplatform.kernel.bundles.server.atmosphere.api.AtmosphereBus"/>
+
+    <!-- <service id="atmosphereBusHandlerService" interface="javax.servlet.http.HttpServlet" depends-on="atmosphereBusService">
         <service-properties>
-            <entry key="urlPatterns" value="/pubsub/*"/>
-            <entry key="servlet-name" value="KernelAtmosphereMeteorPubSubServlet"/>
-            <!--<entry key="httpContext.id" value="pubsub"/>-->
+            <entry key="alias" value="/pubsub"/>
+            <entry key="servlet-name" value="MeteorServlet"/>
+            <entry key="org.atmosphere.servlet" value="org.ozoneplatform.kernel.bundles.server.atmosphere.service.handler.servlet.AtmosphereBusHandlerServlet" />
+            <entry key="contextId" value="pubsub"/>
         </service-properties>
-        <bean class="org.ozoneplatform.kernel.bundles.server.atmosphere.MeteorPubSub">
-            <property name="bundleContext" ref="blueprintBundleContext"/>
-        </bean>
-    </service>
-
-    <bean id="atmosphereBusImpl" class="org.ozoneplatform.kernel.bundles.server.atmosphere.AtmosphereBusImpl">
-        <property name="m_meteorPubSubServletReg" ref="meteorPubSubServlet"/>
-    </bean>
-
-    <service ref="atmosphereBusImpl" interface="org.ozoneplatform.kernel.bundles.server.atmosphere.api.AtmosphereBus"/>
+        <bean class="org.atmosphere.cpr.MeteorServlet"/>
+    </service> -->
 
 </blueprint>

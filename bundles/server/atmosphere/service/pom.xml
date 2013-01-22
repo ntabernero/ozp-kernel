@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.ozoneplatform.kernel.bundles.server.atmosphere</groupId>
+    <groupId>org.ozoneplatform.kernel.bundles.server.atmosphere.service</groupId>
     <artifactId>atmospherebus-service</artifactId>
     <packaging>bundle</packaging>
     <name>${atmosphere.service.description}</name>
@@ -41,6 +41,8 @@
             <version>1.9.3</version>
         </dependency>
 
+
+
         <!-- OSGI Libs -->
         <dependency>
             <groupId>org.osgi</groupId>
@@ -65,17 +67,39 @@
         </dependency>
 
 
-
         <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-servlet_3.0_spec</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <!-- <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
             <version>${servlet.api.version}</version>
-        </dependency>
+        </dependency>-->
 
     </dependencies>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
         <plugins>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.5</version>
+                <executions>
+                    <execution>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>resources</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <!-- Build OSGi Bundle -->
             <plugin>
                 <groupId>org.apache.felix</groupId>
@@ -90,15 +114,25 @@
                     <instructions>
                         <!--<Web-ContextPath>/pubsubservice</Web-ContextPath>-->
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-                        <Bundle-Activator>org.ozoneplatform.kernel.bundles.server.atmosphere.AtmosphereBusImpl</Bundle-Activator>
-                        <Private-Package>org.ozoneplatform.kernel.bundles.server.atmosphere</Private-Package>
+                        <Bundle-Activator>org.ozoneplatform.kernel.bundles.server.atmosphere.service.AtmosphereBusMainServiceServlet</Bundle-Activator>
                         <Export-Package>
-                            org.ozoneplatform.kernel.bundles.server.atmosphere;
-                            version=${project.version}
+                            org.ozoneplatform.kernel.bundles.server.atmosphere.service.handler.servlet;version=${project.version},
+                            org.ozoneplatform.kernel.bundles.server.atmosphere.service;version=${project.version},
+                            org.ozoneplatform.kernel.bundles.server.atmosphere.service.util;version=${project.version}
                         </Export-Package>
                         <Import-Package>
+                            com.sun*;resolution:=optional,
+                            org.glassfish.grizzly*;resolution:=optional,
+                            org.apache.catalina*;resolution:=optional,
+                            org.apache.tomcat*;resolution:=optional,
+                            org.eclipse.jetty*;resolution:=optional,
+                            org.jboss.servlet*;resolution:=optional,
+                            eu.infomas.annotation*;resolution:=optional,
+                            org.apache.coyote*;resolution:=optional,
+                            org.atmosphere.cpr;version=${atmosphere.version},
+                            org.atmosphere.di;version=${atmosphere.version},
                             org.ozoneplatform.kernel.bundles.server.atmosphere.api;version=${project.version},
-                            javax.servlet*;version="[${servlet.api.version}, 3)",
+                            javax.servlet;version="[2.6,3)",
                             *
                         </Import-Package>
                         <!--give files in this project precedence by listing src/main/webapp last-->

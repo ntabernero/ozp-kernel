@@ -23,7 +23,6 @@
     <properties>
         <jetty.port>8080</jetty.port>
         <maven-jetty-plugin.version>6.1.26</maven-jetty-plugin.version>
-        <geronimo.servlet.version>1.1.2</geronimo.servlet.version>
 
         <appendedResourcesDirectory>${basedir}/../../etc/appended-resources</appendedResourcesDirectory>
     </properties>

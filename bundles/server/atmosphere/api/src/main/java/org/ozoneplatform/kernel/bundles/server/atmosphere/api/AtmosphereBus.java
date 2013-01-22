@@ -18,6 +18,9 @@ import org.atmosphere.cpr.AtmosphereInterceptor;
 import org.atmosphere.cpr.Broadcaster;
 import org.atmosphere.cpr.BroadcasterFactory;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 
@@ -31,6 +34,15 @@ import java.util.List;
  * Thanks to this bus you can add AtmosphereHandler and get the BroadcasterFactory at runtime.
  */
 public interface AtmosphereBus {
+
+    public static final String METEOR_PUB_SUB_MAPPING = "/pubsub";
+
+
+    void publish(String publishTopic, String author, String message) throws IOException;
+
+    void subscribe(HttpServletRequest req, HttpServletResponse res, String subscribeTopic) throws IOException;
+
+    Broadcaster lookupBroadcaster(String pathInfo);
 
     /**
      * @return The AtmosphereFramework default BroadcasterFactory.

@@ -20,16 +20,10 @@
            http://www.osgi.org/xmlns/blueprint/v1.0.0
            http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
            ">
+    <reference id="atmosphereBusService" interface="org.ozoneplatform.kernel.bundles.server.atmosphere.api.AtmosphereBus"/>
 
-    <!--
-      We are using the OSGi Blueprint XML syntax to define a bean that we referred to in our JAX-RS server setup.
-      This bean carries a set of JAX-RS annotations that allow its methods to be mapped to incoming requests.
-    -->
-
-    <bean id="atmosphereBusImpl" class="org.ozoneplatform.kernel.bundles.server.atmosphere.AtmosphereBusImpl">
-        <property name="mapping" value="/pubsub"/>
+    <bean id="bundleTracker" class="org.ozoneplatform.kernel.modules.server.bundletracker.Tracker">
+        <property name="atmosphereBus" ref="atmosphereBusService"/>  <!-- Wire in the Atmosphere Bus Service -->
     </bean>
-
-    <service ref="atmosphereBusImpl" interface="org.ozoneplatform.kernel.bundles.server.atmosphere.api.AtmosphereBus"/>
 
 </blueprint>
