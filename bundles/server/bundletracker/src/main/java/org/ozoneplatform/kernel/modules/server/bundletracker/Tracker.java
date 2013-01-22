@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
+import org.atmosphere.cpr.Broadcaster;
 import org.json.JSONException;
 import org.json.JSONStringer;
 import org.osgi.framework.Bundle;
@@ -17,10 +18,15 @@ import org.osgi.framework.BundleEvent;
 import org.osgi.framework.ServiceReference;
 import org.osgi.service.log.LogService;
 import org.osgi.util.tracker.BundleTracker;
+import org.ozoneplatform.kernel.bundles.server.atmosphere.api.AtmosphereBus;
 
 public class Tracker implements BundleActivator {
   private BundleTracker tracker;
   private BundleContext context;
+
+  public static final String TRACKER_PUBSUB_EVENT_TOPIC = "bundletracker";
+
+  protected AtmosphereBus atmosphereBus;
 
   //this must be a synchronized data structure
   private static List<Map> events = new Vector<Map>();
@@ -72,7 +78,7 @@ public class Tracker implements BundleActivator {
     tracker.close();
   }
 
-  private void addEvent(String eventType, Bundle bundle) {
+  private void addEvent(String eventType, Bundle bundle)  {
     Map<String,Object> e = new HashMap<String,Object>();
 
     e.put("Date",new Date());
@@ -84,8 +90,16 @@ public class Tracker implements BundleActivator {
 
     currentState.put(bundle.getSymbolicName(),e);
 
-    log(LogService.LOG_INFO,"addEvent:" + events);
+    log(LogService.LOG_INFO,"addEvent:" + e);
 
+    try{
+        //Broadcast Event
+        log(LogService.LOG_INFO,"BroadCasting Event :" + e + " {} to Topic: " + TRACKER_PUBSUB_EVENT_TOPIC);
+        Broadcaster b = atmosphereBus.lookupBroadcaster(TRACKER_PUBSUB_EVENT_TOPIC);
+        b.broadcast(getCurrentStateJson());
+    }catch (JSONException jse){
+        log(LogService.LOG_ERROR,"JSONException in BundleTracker: " + jse.getStackTrace());
+    }
   }
 
   public static List getEvents() {
@@ -166,4 +180,12 @@ public class Tracker implements BundleActivator {
       System.out.println("LOG " + message);
     }
   }
+
+    public AtmosphereBus getAtmosphereBus() {
+        return atmosphereBus;
+    }
+
+    public void setAtmosphereBus(AtmosphereBus atmosphereBus) {
+        this.atmosphereBus = atmosphereBus;
+    }
 }

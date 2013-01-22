@@ -1,4 +1,4 @@
-package org.ozoneplatform.kernel.bundles.server.atmosphere;
+package org.ozoneplatform.kernel.bundles.server.atmosphere.service.util;
 
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;

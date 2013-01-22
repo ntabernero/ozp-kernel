@@ -6,15 +6,46 @@
         <bundle start-level="80">mvn:org.ozoneplatform.kernel.bundles.server/bundletracker/${project.version}</bundle>
     </feature>
 
-    <feature name="atmospherebus" version="${project.version}" description="${atmospherebus.description}">
+    <feature name="jetty7.6" version="${project.version}" description="Custom Jetty 7.6 Features">
         <!-- Dependencies -->
-        <bundle dependency="true">mvn:org.atmosphere/atmosphere-runtime/${atmosphere.version}</bundle>
-        <bundle dependency="true">mvn:org.mortbay.jetty/jetty-util/${jetty6-version}</bundle>
-        <bundle dependency="true">mvn:org.apache.geronimo.specs/geronimo-servlet_3.0_spec/${geronimo3.servlet.version}</bundle>
+        <bundle dependency="true" start-level="60">mvn:org.eclipse.jetty/jetty-client/7.6.8.v20121106</bundle>
+        <bundle dependency="true" start-level="60">mvn:org.eclipse.jetty/jetty-server/7.6.8.v20121106</bundle>
+        <bundle dependency="true" start-level="60">mvn:org.eclipse.jetty/jetty-util/7.6.8.v20121106</bundle>
+        <bundle dependency="true" start-level="60">mvn:org.eclipse.jetty/jetty-continuation/7.6.8.v20121106</bundle>
+        <bundle dependency="true" start-level="60">mvn:org.eclipse.jetty/jetty-webapp/7.6.8.v20121106</bundle>
+        <bundle dependency="true" start-level="60">mvn:org.eclipse.jetty/jetty-http/7.6.8.v20121106</bundle>
+        <bundle dependency="true" start-level="60">mvn:org.eclipse.jetty/jetty-servlet/7.6.8.v20121106</bundle>
+        <bundle dependency="true" start-level="60">mvn:org.eclipse.jetty/jetty-servlets/7.6.8.v20121106</bundle>
+        <bundle dependency="true" start-level="60">mvn:org.eclipse.jetty/jetty-io/7.6.8.v20121106</bundle>
+        <bundle dependency="true" start-level="60">mvn:org.eclipse.jetty/jetty-websocket/7.6.8.v20121106</bundle>
+        <bundle dependency="true" start-level="60">mvn:org.eclipse.jetty/jetty-xml/7.6.8.v20121106</bundle>
+        <bundle dependency="true" start-level="60">mvn:org.eclipse.jetty/jetty-security/7.6.8.v20121106</bundle>
+        <bundle dependency="true" start-level="60">mvn:org.eclipse.jetty/jetty-plus/7.6.8.v20121106</bundle>
+        <bundle dependency="true" start-level="60">mvn:org.eclipse.jetty/jetty-jmx/7.6.8.v20121106</bundle>
+        <bundle dependency="true" start-level="60">mvn:org.eclipse.jetty/jetty-jndi/7.6.8.v20121106</bundle>
+        <bundle dependency="true" start-level="60">mvn:org.eclipse.jetty/jetty-ajp/7.6.8.v20121106</bundle>
+    </feature>
+
+    <feature name="atmospherebus" version="${project.version}" description="${atmospherebus.description} Feature">
+        <!-- Dependencies -->
+        <feature>jetty7.6</feature>
+        <bundle dependency="true" start-level="60">mvn:org.atmosphere/atmosphere-compat-tomcat7/1.1.0.beta2</bundle>
+        <bundle dependency="true" start-level="60">mvn:org.atmosphere/atmosphere-compat-tomcat/1.1.0.beta2</bundle>
+        <bundle dependency="true" start-level="60">mvn:org.mortbay.jetty/jetty/6.1.22</bundle>
+        <bundle dependency="true" start-level="60">mvn:org.mortbay.jetty/jetty-util/6.1.22</bundle>
+        <bundle dependency="true" start-level="60">mvn:org.mortbay.jetty/jetty-management/6.1.22</bundle>
+        <!--<bundle dependency="true" start-level="30">mvn:org.apache.geronimo.specs/geronimo-servlet_2.5_spec/1.1.2</bundle>-->
+        <bundle dependency="true" start-level="60">mvn:org.atmosphere/atmosphere-compat-jbossweb/1.1.0.beta2</bundle>
+        <bundle dependency="true" start-level="60">mvn:org.codehaus.groovy/groovy-all/2.0.6</bundle>
+        <bundle dependency="true" start-level="60">mvn:org.codehaus.jackson/jackson-jaxrs/1.9.0</bundle>
+
+        <bundle dependency="true" start-level="70">mvn:org.atmosphere/atmosphere-runtime/1.1.0.beta2</bundle>
+        <!--<bundle dependency="true" start-level="80">mvn:org.apache.geronimo.specs/geronimo-servlet_3.0_spec/1.0</bundle>-->
 
         <!-- Core -->
-        <bundle start-level="80">mvn:org.ozoneplatform.kernel.bundles.server.atmosphere.api/atmospherebus-api/${project.version}</bundle>
-        <bundle start-level="80">mvn:org.ozoneplatform.kernel.bundles.server.atmosphere/atmospherebus-service/${project.version}</bundle>
+        <bundle>mvn:org.ozoneplatform.kernel.bundles.server.atmosphere.api/atmospherebus-api/1.0.0-SNAPSHOT</bundle>
+        <bundle>mvn:org.ozoneplatform.kernel.bundles.server.atmosphere.service/atmospherebus-service/1.0.0-SNAPSHOT</bundle>
+        <bundle>mvn:org.ozoneplatform.kernel.bundles.server.atmosphere.rest/atmospherebus-rest/${project.version}</bundle>
     </feature>
 
 </features>

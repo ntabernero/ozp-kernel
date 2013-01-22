@@ -34,6 +34,7 @@
         <atmospherebus.description>Ozone Platform :: Kernel :: Bundles :: Server :: Atmosphere Bus</atmospherebus.description>
         <atmosphere.api.description>${atmospherebus.description} API</atmosphere.api.description>
         <atmosphere.service.description>${atmospherebus.description} Service</atmosphere.service.description>
+        <atmosphere.rest.description>${atmospherebus.description} Rest</atmosphere.rest.description>
         <atmosphere.version>1.1.0.beta2</atmosphere.version>
         <jetty6-version>6.1.22</jetty6-version>
         <geronimo3.servlet.version>1.0</geronimo3.servlet.version>

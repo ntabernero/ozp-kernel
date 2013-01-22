@@ -19,6 +19,21 @@
     <packaging>bundle</packaging>
 
     <dependencies>
+
+        <!-- Incl. Atmosphere CPR module -->
+        <dependency>
+            <groupId>org.atmosphere</groupId>
+            <artifactId>atmosphere-runtime</artifactId>
+            <version>${atmosphere.version}</version>
+        </dependency>
+
+        <!-- Incl. Custom Atmosphere API -->
+        <dependency>
+            <groupId>org.ozoneplatform.kernel.bundles.server.atmosphere.api</groupId>
+            <artifactId>atmospherebus-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.osgi</groupId>
             <artifactId>org.osgi.core</artifactId>
@@ -64,6 +79,7 @@
                         <!-- don't export anything -->
                         <!--<Export-Package></Export-Package>-->
                         <Import-Package>
+                            org.ozoneplatform.kernel.bundles.server.atmosphere.api;version=${project.version},
                             javax.servlet*;version=2.5,
                             *
                         </Import-Package>
