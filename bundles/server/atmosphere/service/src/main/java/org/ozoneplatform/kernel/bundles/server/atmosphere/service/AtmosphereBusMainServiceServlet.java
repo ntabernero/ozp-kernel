@@ -49,7 +49,7 @@ import java.util.*;
  * To change this template use File | Settings | File Templates.
  */
 
-public class AtmosphereBusMainServiceServlet extends AtmosphereServlet implements AtmosphereBus, BundleActivator {
+public class AtmosphereBusMainServiceServlet extends AtmosphereServlet implements AtmosphereBus {
 
     protected LoggerService loggerService;
 
@@ -57,42 +57,38 @@ public class AtmosphereBusMainServiceServlet extends AtmosphereServlet implement
 
     protected BundleContext bundleContext;
 
-    protected ServiceRegistration atmosphereBusHttpService;
-
     protected AtmosphereBusHandlerServlet atmosphereBusHandlerServlet;
 
     private final List<AtmosphereInterceptor> interceptors = new ArrayList<AtmosphereInterceptor>();
 
     public AtmosphereBusMainServiceServlet() {
-        framework = new AtmosphereFramework(false, false);
+        super(false);
     }
 
-    // ----------------------------
-    //   BundleActivator impl.
-    // ----------------------------
-    public void start(BundleContext bundleContext) throws Exception {
+    public BundleContext getBundleContext() {
+        return bundleContext;
+    }
+
+    public void setBundleContext(BundleContext bundleContext) {
         this.bundleContext = bundleContext;
-        loggerService = new LoggerService(AtmosphereBusMainServiceServlet.class, bundleContext);
-
-        //interceptors.add(new BroadcastOnPostAtmosphereInterceptor());           // for pushing messages to suspended connection
-        interceptors.add(new AtmosphereResourceLifecycleInterceptor());          // for managing the connection lifecycle
-        interceptors.add(new TrackMessageSizeInterceptor());            // for making sure messages are delivered entirely
-        interceptors.add(new HeartbeatInterceptor());           // for keeping the connection active
-
         Dictionary props = new Hashtable();
         props.put("alias", METEOR_PUB_SUB_MAPPING);
         props.put("servlet-name", "Atmoshere Bus Servlet");
-        props.put("org.atmosphere.useNative", "true");
+        //props.put("org.atmosphere.useNative", "true");
         //props.put("org.atmosphere.cpr.CometSupport", "JettyServlet30AsyncSupportWithWebSocket");
-        atmosphereBusHttpService  = bundleContext.registerService(HttpServlet.class.getName(), this, props);
+        String[] registerServiceNames = {HttpServlet.class.getName(), AtmosphereBus.class.getName()};
+        bundleContext.registerService(registerServiceNames, this, props);
 
+        loggerService = new LoggerService(AtmosphereBusMainServiceServlet.class, bundleContext);
         loggerService.log(LogService.LOG_INFO, "[AtmosphereBus]: Started '" + AtmosphereBusMainServiceServlet.class.getName() + "' {} " + METEOR_PUB_SUB_MAPPING);
-     }
+    }
 
-    public void stop(BundleContext bundleContext) throws Exception {
+    @Override
+    public void destroy(){
         removeAtmosphereHandler(PUB_SUB_INNER_MAPPING);
         interceptors.clear();
         loggerService.log(LogService.LOG_INFO, "[AtmosphereBus]: Stopped '" + AtmosphereBusMainServiceServlet.class.getName() + "' {} " + METEOR_PUB_SUB_MAPPING);
+        super.destroy();
     }
 
     // ----------------------------
@@ -110,6 +106,10 @@ public class AtmosphereBusMainServiceServlet extends AtmosphereServlet implement
      */
     public BroadcasterFactory getBroadcasterFactory(){
         return framework.getBroadcasterFactory();
+    }
+
+    public AtmosphereFramework getFramework(){
+        return this.framework();
     }
 
     /**
@@ -155,10 +155,6 @@ public class AtmosphereBusMainServiceServlet extends AtmosphereServlet implement
     }
 
     public void subscribe(HttpServletRequest req, HttpServletResponse res, String subscribeTopic)  throws IOException{
-
-        //Need to add AtmoshereResource to attribute before calling Meteor
-        //AtmosphereRequest aReq = AtmosphereRequest.wrap(req);
-        //AtmosphereResponse aRes = AtmosphereResponse.wrap(res);
 
         // Create a Meteor
         Meteor m = Meteor.build(req);
@@ -232,7 +228,12 @@ public class AtmosphereBusMainServiceServlet extends AtmosphereServlet implement
     @Override
     public void init(ServletConfig sc) throws ServletException {
 
-        //DefaultBroadcasterFactory.getDefault().remove("/*");
+        //interceptors.add(new BroadcastOnPostAtmosphereInterceptor());           // for pushing messages to suspended connection
+        interceptors.add(new AtmosphereResourceLifecycleInterceptor());          // for managing the connection lifecycle
+        interceptors.add(new TrackMessageSizeInterceptor());            // for making sure messages are delivered entirely
+        interceptors.add(new HeartbeatInterceptor());           // for keeping the connection active
+
+        framework.addInitParameter("org.atmosphere.useNative", "true");
 
         //for caching message.
         framework.setBroadcasterCacheClassName(HeaderBroadcasterCache.class.getName());

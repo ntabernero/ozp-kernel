@@ -32,27 +32,20 @@
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-frontend-jaxrs</artifactId>
-            <version>2.6.0</version>
+            <version>${cxf2.6-version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-jaxrs</artifactId>
-            <version>1.9.0</version>
+            <version>${jackson-jackson.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.codehaus.gmaven.runtime</groupId>
-            <artifactId>gmaven-runtime-2.0</artifactId>
-            <version>1.5</version>
+       <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-servlet_3.0_spec</artifactId>
+            <version>${geronimo3.servlet.version}</version>
         </dependency>
-
-        <dependency>
-            <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy-all</artifactId>
-            <version>2.0.6</version>
-        </dependency>
-
 
     </dependencies>
 
@@ -87,7 +80,12 @@
                     <instructions>
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Import-Package>
-                            org.ozoneplatform.kernel.bundles.server.atmosphere.api;version=${project.version},*
+                            org.ozoneplatform.kernel.bundles.server.atmosphere.api;version=${project.version},
+                            org.apache.cxf.ws.policy.builder.jaxb,
+                            org.atmosphere.cpr;version=${atmosphere.version},
+                            org.atmosphere.di;version=${atmosphere.version},
+                            javax.servlet;version="[2.6,3)",
+                            *
                         </Import-Package>
                         <Export-Package>org.ozoneplatform.kernel.bundles.server.atmosphere.rest;version=${project.version}</Export-Package>
                     </instructions>

@@ -22,9 +22,19 @@
            ">
 
 
-    <bean id="atmosphereBusService" class="org.ozoneplatform.kernel.bundles.server.atmosphere.service.AtmosphereBusMainServiceServlet"/>
+    <bean id="atmosphereBusServlet" class="org.ozoneplatform.kernel.bundles.server.atmosphere.service.AtmosphereBusMainServiceServlet" scope="singleton">
+        <property name="bundleContext" ref="blueprintBundleContext"/>
+    </bean>
 
-    <service ref="atmosphereBusService" interface="org.ozoneplatform.kernel.bundles.server.atmosphere.api.AtmosphereBus"/>
+    <!--<service id="atmosphereBusServletService" auto-export="interfaces" ref="atmosphereBusServlet">
+        <service-properties>
+            <entry key="alias" value="/pubsub"/>
+            <entry key="contextId" value="pubsub"/>
+            <entry key="servlet-name" value="Atmoshere Bus Servlet"/>
+            <entry key="org.atmosphere.useNative" value="true" />    -->
+            <!--<entry key="org.atmosphere.cpr.CometSupport" value="JettyAsyncSupportWithWebSocket"/> -->
+       <!-- </service-properties>
+    </service>  -->
 
     <!-- <service id="atmosphereBusHandlerService" interface="javax.servlet.http.HttpServlet" depends-on="atmosphereBusService">
         <service-properties>

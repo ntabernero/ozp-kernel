@@ -95,7 +95,7 @@ public class Tracker implements BundleActivator {
     try{
         //Broadcast Event
         log(LogService.LOG_INFO,"BroadCasting Event :" + e + " {} to Topic: " + TRACKER_PUBSUB_EVENT_TOPIC);
-        Broadcaster b = atmosphereBus.lookupBroadcaster(TRACKER_PUBSUB_EVENT_TOPIC);
+        Broadcaster b = getAtmosphereBusService().lookupBroadcaster(TRACKER_PUBSUB_EVENT_TOPIC);
         b.broadcast(getCurrentStateJson());
     }catch (JSONException jse){
         log(LogService.LOG_ERROR,"JSONException in BundleTracker: " + jse.getStackTrace());
@@ -180,6 +180,16 @@ public class Tracker implements BundleActivator {
       System.out.println("LOG " + message);
     }
   }
+
+    protected AtmosphereBus getAtmosphereBusService(){
+        if(atmosphereBus == null){
+            ServiceReference atmosphereBusServiceRef = context.getServiceReference(AtmosphereBus.class.getName());
+            if (atmosphereBusServiceRef != null) {
+                atmosphereBus = (AtmosphereBus) context.getService(atmosphereBusServiceRef);
+            }
+        }
+        return atmosphereBus;
+    }
 
     public AtmosphereBus getAtmosphereBus() {
         return atmosphereBus;

@@ -37,7 +37,12 @@
         <atmosphere.rest.description>${atmospherebus.description} Rest</atmosphere.rest.description>
         <atmosphere.version>1.1.0.beta2</atmosphere.version>
         <jetty6-version>6.1.22</jetty6-version>
+        <jetty7.6-version>7.6.8.v20121106</jetty7.6-version>
         <geronimo3.servlet.version>1.0</geronimo3.servlet.version>
+        <groovy-all.version>2.0.6</groovy-all.version>
+        <jackson-jackson.version>1.9.0</jackson-jackson.version>
+        <cxf2.6-version>2.6.0</cxf2.6-version>
+
 
         <!-- CORE Kernel Properties -->
         <fuse.version>7.0.0.fuse-061</fuse.version>
