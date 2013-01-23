@@ -8,7 +8,7 @@
         <groupId>org.ozoneplatform</groupId>
         <artifactId>ozoneplatform</artifactId>
         <version>1.0.0-SNAPSHOT</version>
-        <!--<relativePath>../pom.xml</relativePath>-->
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <groupId>org.ozoneplatform.kernel</groupId>
@@ -36,12 +36,18 @@
         <atmosphere.service.description>${atmospherebus.description} Service</atmosphere.service.description>
         <atmosphere.rest.description>${atmospherebus.description} Rest</atmosphere.rest.description>
         <atmosphere.version>1.1.0.beta2</atmosphere.version>
-        <jetty6-version>6.1.22</jetty6-version>
+        <jetty6-version>6.1.26_4</jetty6-version>
+        <jetty7.6-version>7.6.8.v20121106</jetty7.6-version>
         <geronimo3.servlet.version>1.0</geronimo3.servlet.version>
+        <groovy-all.version>2.0.6</groovy-all.version>
+        <jackson-jackson.version>1.9.0</jackson-jackson.version>
+
 
         <!-- CORE Kernel Properties -->
-        <fuse.version>7.0.0.fuse-061</fuse.version>
-        <fabric.version>7.0.0.fuse-061</fabric.version>
+        <fuse.version>7.1.0.fuse-047</fuse.version>
+
+        <!-- defined in parent owf platform -->
+        <!-- <fabric.version></fabric.version> -->
 
         <xalan.version>2.7.1</xalan.version>
         <xbean-version>3.9</xbean-version>
@@ -56,10 +62,10 @@
         <aopalliance.bundle.version>1.0_5</aopalliance.bundle.version>
         <asm.bundle.version>3.3.1_1</asm.bundle.version>
 
-        <camel-version>2.9.0.fuse-7-061</camel-version>
-        <camel.version>${camel-version}</camel.version>
-        <cxf-version>2.5.0.fuse-7-061</cxf-version>
-        <cxf.version>${cxf-version}</cxf.version>
+        <camel.version>2.10.0.fuse-71-047</camel.version>
+        
+        <!-- defined in parent owf platform -->
+        <!--<cxf.version></cxf.version> -->
 
 
         <cglib.bundle.version>2.1_3_7</cglib.bundle.version>
@@ -177,80 +183,55 @@
     </scm>
 
     <repositories>
-        <!--these need to be here if build with out the ozoneplatform parent project-->
-        <repository>
-            <id>ozone.release</id>
-            <name>Ozone Community Release Repository</name>
-            <url>https://www.owfgoss.org/nexus/content/repositories/releases</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-        </repository>
-        <repository>
-            <id>ozone.snapshot</id>
-            <name>Ozone Community Snapshot Repository</name>
-            <url>https://www.owfgoss.org/nexus/content/repositories/snapshots</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-        </repository>
-        <!--these need to be here if build with out the ozoneplatform parent project-->
-
         <repository>
             <id>repo1.maven</id>
             <name>Maven Central Repo</name>
             <url>http://repo1.maven.org/maven2/</url>
         </repository>
-        <!--<repository>-->
-            <!--<id>fusesource.m2</id>-->
-            <!--<name>FuseSource Community Release Repository</name>-->
-            <!--<url>http://repo.fusesource.com/nexus/content/repositories/public</url>-->
-            <!--<snapshots>-->
-                <!--<enabled>false</enabled>-->
-            <!--</snapshots>-->
-            <!--<releases>-->
-                <!--<enabled>true</enabled>-->
-            <!--</releases>-->
-        <!--</repository>-->
-        <!--<repository>-->
-            <!--<id>fusesource.ea</id>-->
-            <!--<name>FuseSource Community Early Access Release Repository</name>-->
-            <!--<url>http://repo.fusesource.com/nexus/content/groups/ea</url>-->
-            <!--<snapshots>-->
-                <!--<enabled>false</enabled>-->
-            <!--</snapshots>-->
-            <!--<releases>-->
-                <!--<enabled>true</enabled>-->
-            <!--</releases>-->
-        <!--</repository>-->
-        <!--<repository>-->
-            <!--<id>fusesource.m2-snapshot</id>-->
-            <!--<name>FuseSource Community Snapshot Repository</name>-->
-            <!--<url>http://repo.fusesource.com/nexus/content/repositories/snapshots</url>-->
-            <!--<snapshots>-->
-                <!--<enabled>true</enabled>-->
-            <!--</snapshots>-->
-            <!--<releases>-->
-                <!--<enabled>false</enabled>-->
-            <!--</releases>-->
-        <!--</repository>-->
-        <!--<repository>-->
-            <!--<id>fusesource.nexus.m2-snapshot</id>-->
-            <!--<name>FuseSource Community Snapshot Repository</name>-->
-            <!--<url>http://repo.fusesource.com/nexus/content/groups/public-snapshots</url>-->
-            <!--<snapshots>-->
-                <!--<enabled>true</enabled>-->
-            <!--</snapshots>-->
-            <!--<releases>-->
-                <!--<enabled>false</enabled>-->
-            <!--</releases>-->
-        <!--</repository>-->
+        <repository>
+            <id>fusesource.m2</id>
+            <name>FuseSource Community Release Repository</name>
+            <url>http://repo.fusesource.com/nexus/content/repositories/public</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+        <repository>
+            <id>fusesource.ea</id>
+            <name>FuseSource Community Early Access Release Repository</name>
+            <url>http://repo.fusesource.com/nexus/content/groups/ea</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+        <repository>
+            <id>fusesource.m2-snapshot</id>
+            <name>FuseSource Community Snapshot Repository</name>
+            <url>http://repo.fusesource.com/nexus/content/repositories/snapshots</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </repository>
+        <repository>
+            <id>fusesource.nexus.m2-snapshot</id>
+            <name>FuseSource Community Snapshot Repository</name>
+            <url>http://repo.fusesource.com/nexus/content/groups/public-snapshots</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </repository>
         <repository>
             <id>apache.snapshots</id>
             <name>Apache Development Snapshot Repository</name>

@@ -13,10 +13,7 @@
  */
 package org.ozoneplatform.kernel.bundles.server.atmosphere.api;
 
-import org.atmosphere.cpr.AtmosphereHandler;
-import org.atmosphere.cpr.AtmosphereInterceptor;
-import org.atmosphere.cpr.Broadcaster;
-import org.atmosphere.cpr.BroadcasterFactory;
+import org.atmosphere.cpr.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -43,6 +40,8 @@ public interface AtmosphereBus {
     void subscribe(HttpServletRequest req, HttpServletResponse res, String subscribeTopic) throws IOException;
 
     Broadcaster lookupBroadcaster(String pathInfo);
+
+    AtmosphereFramework getFramework();
 
     /**
      * @return The AtmosphereFramework default BroadcasterFactory.
