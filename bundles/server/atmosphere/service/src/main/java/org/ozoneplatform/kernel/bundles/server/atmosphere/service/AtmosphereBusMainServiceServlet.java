@@ -74,8 +74,8 @@ public class AtmosphereBusMainServiceServlet extends AtmosphereServlet implement
         Dictionary props = new Hashtable();
         props.put("alias", METEOR_PUB_SUB_MAPPING);
         props.put("servlet-name", "Atmoshere Bus Servlet");
-        //props.put("org.atmosphere.useNative", "true");
-        //props.put("org.atmosphere.cpr.CometSupport", "JettyServlet30AsyncSupportWithWebSocket");
+        props.put("org.atmosphere.useNative", "true");
+        props.put("org.atmosphere.cpr.CometSupport", "JettyAsyncSupportWithWebSocket");//"JettyServlet30AsyncSupportWithWebSocket");
         String[] registerServiceNames = {HttpServlet.class.getName(), AtmosphereBus.class.getName()};
         bundleContext.registerService(registerServiceNames, this, props);
 
@@ -249,7 +249,7 @@ public class AtmosphereBusMainServiceServlet extends AtmosphereServlet implement
         super.init(sc);
 
 
-        framework.setAsyncSupport(new JettyAsyncSupportWithWebSocket(framework.getAtmosphereConfig()));
+        //framework.setAsyncSupport(new JettyAsyncSupportWithWebSocket(framework.getAtmosphereConfig()));
 
 
         framework.initAtmosphereHandler(sc);
