@@ -60,6 +60,8 @@ public class AtmosphereBusMainServiceServlet extends AtmosphereServlet implement
     protected AtmosphereBusHandlerServlet atmosphereBusHandlerServlet;
 
     private final List<AtmosphereInterceptor> interceptors = new ArrayList<AtmosphereInterceptor>();
+    
+    private final List<String> mappings = new ArrayList<String>();
 
     public AtmosphereBusMainServiceServlet() {
         super(false);
@@ -120,16 +122,22 @@ public class AtmosphereBusMainServiceServlet extends AtmosphereServlet implement
      * @throws IllegalArgumentException if an handler is already linked to this mapping.
      */
     public void addAtmosphereHandler(String hMapping, AtmosphereHandler handler){
-        framework.addAtmosphereHandler(constructMapping(hMapping), handler);
+    	String mapping = constructMapping(hMapping);
+    	mappings.add(mapping);
+        framework.addAtmosphereHandler(mapping, handler);
     }
 
     public void addAtmosphereHandler(String hMapping, AtmosphereHandler handler, List<AtmosphereInterceptor> interceptors){
-        framework.addAtmosphereHandler(constructMapping(hMapping), handler, interceptors);
+    	String mapping = constructMapping(hMapping);
+    	mappings.add(mapping);
+        framework.addAtmosphereHandler(mapping, handler, interceptors);
 
     }
 
     public void addAtmosphereHandler(String hMapping, AtmosphereHandler handler, Broadcaster broadcaster, List<AtmosphereInterceptor> interceptors){
-        framework.addAtmosphereHandler(constructMapping(hMapping), handler, broadcaster, interceptors);
+    	String mapping = constructMapping(hMapping);
+    	mappings.add(mapping);
+        framework.addAtmosphereHandler(mapping, handler, broadcaster, interceptors);
     }
 
     /**
@@ -137,7 +145,10 @@ public class AtmosphereBusMainServiceServlet extends AtmosphereServlet implement
      * @param hMapping The existing AtmosphereHandler mapping.
      */
     public void removeAtmosphereHandler(String hMapping){
-        framework.removeAtmosphereHandler(constructMapping(hMapping));
+    	String mapping = constructMapping(hMapping);
+    	if(mappings.remove(mapping)){//If indeed the mapping was removed, pass that along...
+    		framework.removeAtmosphereHandler(mapping);
+    	}
     }
 
     public void publish(String publishTopic, String author, String message) throws IOException {

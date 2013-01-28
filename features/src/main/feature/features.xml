@@ -2,8 +2,11 @@
 
 <features name="org.ozoneplatform.kernel.features-repo">
 
-    <feature name="jetty7.6" version="${project.version}" description="Custom Jetty 7.6 Features" start-level='30'>
-        <bundle>mvn:org.apache.geronimo.specs/geronimo-servlet_3.0_spec/${geronimo3.servlet.version}</bundle>
+	<feature name="servlet3.0" version="${project.version}" description="Servlet 3.0 Features">
+		<bundle start-level="20">mvn:org.apache.geronimo.specs/geronimo-servlet_3.0_spec/${geronimo3.servlet.version}</bundle>
+    </feature>
+
+    <feature name="jetty7.6" version="${project.version}" description="Custom Jetty 7.6 Features">
         <!-- core -->
         <bundle>mvn:org.eclipse.jetty/jetty-client/${jetty7.6-version}</bundle>
         <bundle>mvn:org.eclipse.jetty/jetty-server/${jetty7.6-version}</bundle>
@@ -28,6 +31,7 @@
         <!-- Dependencies -->
         <feature>cxf</feature>
         <feature>jetty7.6</feature>
+        <feature>servlet3.0</feature>
         <bundle dependency="true">mvn:org.mortbay.jetty/jetty-util/${jettyMortBay-version}</bundle>
         <!--<bundle dependency="true">mvn:org.codehaus.groovy/groovy-all/${groovy-all.version}</bundle>-->
         <bundle dependency="true">mvn:org.codehaus.jackson/jackson-jaxrs/${jackson.version}</bundle>
