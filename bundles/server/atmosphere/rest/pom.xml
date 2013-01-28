@@ -38,7 +38,7 @@
         <dependency>
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-jaxrs</artifactId>
-            <version>${jackson-jackson.version}</version>
+            <version>${jackson.version}</version>
         </dependency>
 
        <dependency>
@@ -81,7 +81,7 @@
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Import-Package>
                             org.ozoneplatform.kernel.bundles.server.atmosphere.api;version=${project.version},
-                            org.apache.cxf.ws.policy.builder.jaxb,
+                            <!-- org.apache.cxf.ws.policy.builder.jaxb, -->
                             org.atmosphere.cpr;version=${atmosphere.version},
                             org.atmosphere.di;version=${atmosphere.version},
                             javax.servlet;version="[2.6,3)",

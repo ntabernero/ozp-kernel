@@ -2,41 +2,41 @@
 
 <features name="org.ozoneplatform.kernel.features-repo">
 
-    <feature name="jetty7.6" version="${project.version}" description="Custom Jetty 7.6 Features">
-        <!-- Dependencies -->
-        <bundle dependency="true" start-level="50">mvn:org.apache.geronimo.specs/geronimo-servlet_3.0_spec/${geronimo3.servlet.version}</bundle>
+    <feature name="jetty7.6" version="${project.version}" description="Custom Jetty 7.6 Features" start-level='30'>
+        <bundle>mvn:org.apache.geronimo.specs/geronimo-servlet_3.0_spec/${geronimo3.servlet.version}</bundle>
         <!-- core -->
-        <bundle dependency="true" start-level="60">mvn:org.eclipse.jetty/jetty-client/${jetty7.6-version}</bundle>
-        <bundle dependency="true" start-level="60">mvn:org.eclipse.jetty/jetty-server/${jetty7.6-version}</bundle>
-        <bundle dependency="true" start-level="60">mvn:org.eclipse.jetty/jetty-util/${jetty7.6-version}</bundle>
-        <bundle dependency="true" start-level="60">mvn:org.eclipse.jetty/jetty-continuation/${jetty7.6-version}</bundle>
-        <bundle dependency="true" start-level="60">mvn:org.eclipse.jetty/jetty-webapp/${jetty7.6-version}</bundle>
-        <bundle dependency="true" start-level="60">mvn:org.eclipse.jetty/jetty-http/${jetty7.6-version}</bundle>
-        <bundle dependency="true" start-level="60">mvn:org.eclipse.jetty/jetty-servlet/${jetty7.6-version}</bundle>
-        <bundle dependency="true" start-level="60">mvn:org.eclipse.jetty/jetty-servlets/${jetty7.6-version}</bundle>
-        <bundle dependency="true" start-level="60">mvn:org.eclipse.jetty/jetty-io/${jetty7.6-version}</bundle>
-        <bundle dependency="true" start-level="60">mvn:org.eclipse.jetty/jetty-websocket/${jetty7.6-version}</bundle>
-        <bundle dependency="true" start-level="60">mvn:org.eclipse.jetty/jetty-xml/${jetty7.6-version}</bundle>
-        <bundle dependency="true" start-level="60">mvn:org.eclipse.jetty/jetty-security/${jetty7.6-version}</bundle>
-        <bundle dependency="true" start-level="60">mvn:org.eclipse.jetty/jetty-plus/${jetty7.6-version}</bundle>
-        <bundle dependency="true" start-level="60">mvn:org.eclipse.jetty/jetty-jmx/${jetty7.6-version}</bundle>
-        <bundle dependency="true" start-level="60">mvn:org.eclipse.jetty/jetty-jndi/${jetty7.6-version}</bundle>
-        <bundle dependency="true" start-level="60">mvn:org.eclipse.jetty/jetty-ajp/${jetty7.6-version}</bundle>
+        <bundle>mvn:org.eclipse.jetty/jetty-client/${jetty7.6-version}</bundle>
+        <bundle>mvn:org.eclipse.jetty/jetty-server/${jetty7.6-version}</bundle>
+        <bundle>mvn:org.eclipse.jetty/jetty-util/${jetty7.6-version}</bundle>
+        <bundle>mvn:org.eclipse.jetty/jetty-continuation/${jetty7.6-version}</bundle>
+        <bundle>mvn:org.eclipse.jetty/jetty-webapp/${jetty7.6-version}</bundle>
+        <bundle>mvn:org.eclipse.jetty/jetty-http/${jetty7.6-version}</bundle>
+        <bundle>mvn:org.eclipse.jetty/jetty-servlet/${jetty7.6-version}</bundle>
+        <bundle>mvn:org.eclipse.jetty/jetty-servlets/${jetty7.6-version}</bundle>
+        <bundle>mvn:org.eclipse.jetty/jetty-io/${jetty7.6-version}</bundle>
+        <bundle>mvn:org.eclipse.jetty/jetty-websocket/${jetty7.6-version}</bundle>
+        <bundle>mvn:org.eclipse.jetty/jetty-xml/${jetty7.6-version}</bundle>
+        <bundle>mvn:org.eclipse.jetty/jetty-security/${jetty7.6-version}</bundle>
+        <bundle>mvn:org.eclipse.jetty/jetty-plus/${jetty7.6-version}</bundle>
+        <bundle>mvn:org.eclipse.jetty/jetty-jmx/${jetty7.6-version}</bundle>
+        <bundle>mvn:org.eclipse.jetty/jetty-jndi/${jetty7.6-version}</bundle>
+        <bundle>mvn:org.eclipse.jetty/jetty-ajp/${jetty7.6-version}</bundle>
     </feature>
-
-    <feature name="atmosphere-runtime-framework" version="${project.version}" description="Atmosphere Runtime (${atmosphere.version}) Framework Feature">
+    
+    <feature name="atmosphere-runtime-framework" version="${project.version}" 
+    	description="Atmosphere Runtime (${atmosphere.version}) Framework Feature">
         <!-- Dependencies -->
         <feature>cxf</feature>
         <feature>jetty7.6</feature>
-        <bundle dependency="true" start-level="60">mvn:org.atmosphere/atmosphere-compat-tomcat7/${atmosphere.version}</bundle>
-        <bundle dependency="true" start-level="60">mvn:org.atmosphere/atmosphere-compat-tomcat/${atmosphere.version}</bundle>
-        <bundle dependency="true" start-level="60">mvn:org.atmosphere/atmosphere-compat-jbossweb/${atmosphere.version}</bundle>
-        <bundle dependency="true" start-level="60">mvn:org.mortbay.jetty/jetty/${jetty6-version}</bundle>
-        <bundle dependency="true" start-level="60">mvn:org.mortbay.jetty/jetty-util/${jetty6-version}</bundle>
-        <bundle dependency="true" start-level="60">mvn:org.mortbay.jetty/jetty-management/${jetty6-version}</bundle>
-        <bundle dependency="true" start-level="60">mvn:org.codehaus.groovy/groovy-all/${groovy-all.version}</bundle>
-        <bundle dependency="true" start-level="60">mvn:org.codehaus.jackson/jackson-jaxrs/${jackson-jackson.version}</bundle>
-        <bundle dependency="true" start-level="70">mvn:org.atmosphere/atmosphere-runtime/${atmosphere.version}</bundle>
+        <bundle dependency="true">mvn:org.mortbay.jetty/jetty-util/${jettyMortBay-version}</bundle>
+        <!--<bundle dependency="true">mvn:org.codehaus.groovy/groovy-all/${groovy-all.version}</bundle>-->
+        <bundle dependency="true">mvn:org.codehaus.jackson/jackson-jaxrs/${jackson.version}</bundle>
+        
+        <!-- Atmosphere Runtime -->
+        <bundle>mvn:org.atmosphere/atmosphere-compat-tomcat7/${atmosphere.version}</bundle>
+        <bundle>mvn:org.atmosphere/atmosphere-compat-tomcat/${atmosphere.version}</bundle>
+        <bundle>mvn:org.atmosphere/atmosphere-compat-jbossweb/${atmosphere.version}</bundle>
+        <bundle>mvn:org.atmosphere/atmosphere-runtime/${atmosphere.version}</bundle>
     </feature>
 
     <feature name="atmospherebus" version="${project.version}" description="${atmospherebus.description} Feature">
@@ -53,7 +53,7 @@
         <!-- Dependencies -->
         <feature>atmospherebus</feature>
 
-        <bundle start-level="80">mvn:org.ozoneplatform.kernel.bundles.server/bundletracker/${project.version}</bundle>
+        <bundle>mvn:org.ozoneplatform.kernel.bundles.server/bundletracker/${project.version}</bundle>
     </feature>
 
 </features>

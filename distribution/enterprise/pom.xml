@@ -41,13 +41,13 @@
                                 <descriptor>mvn:org.apache.activemq/activemq-karaf/${activemq.version}/xml/features</descriptor>
                                 <descriptor>mvn:org.apache.camel.karaf/apache-camel/${camel.version}/xml/features</descriptor>
                                 <descriptor>mvn:org.apache.cxf.karaf/apache-cxf/${cxf.version}/xml/features</descriptor>
-                                <descriptor>mvn:org.fusesource.esb/fuse-esb/${fuse.version}/xml/features</descriptor>
                                 <descriptor>mvn:org.fusesource.patch/patch-features/${fuse.version}/xml/features</descriptor>
 
                                 <!-- FuseSource only : Fabric -->
                                 <descriptor>mvn:org.fusesource.fabric/fuse-fabric/${fabric.version}/xml/features</descriptor>
                             
                                 <!-- KERNEL Features -->
+                                <descriptor>mvn:org.ozoneplatform.kernel.distribution/base/${project.version}/xml/features</descriptor>
                                 <descriptor>mvn:org.ozoneplatform.kernel/features/${project.version}/xml/features</descriptor>
 
                                 <!-- OWF Features -->
