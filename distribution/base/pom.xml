@@ -149,9 +149,6 @@
                                 <feature>fabric-bundle</feature>
                                 <feature>patch</feature>
 
-                                <!-- Bundletracker -->
-                                <feature>bundletracker</feature>
-
                                 <!-- owf -->
                                 <feature>owf</feature>
 
