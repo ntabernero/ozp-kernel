@@ -33,8 +33,9 @@
         <jettyMortBay-version>6.1.26</jettyMortBay-version>
         <jetty7.6-version>7.6.8.v20121106</jetty7.6-version>
         <geronimo3.servlet.version>1.0</geronimo3.servlet.version>
-        <groovy-all.version>2.0.6</groovy-all.version>
         <jackson.version>1.9.0</jackson.version>
+        <junitVersion>4.8.1</junitVersion>
+        <spock.version>0.7-groovy-2.0</spock.version>
 
 
         <xalan.version>2.7.1</xalan.version>

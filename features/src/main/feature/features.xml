@@ -33,7 +33,7 @@
         <feature>jetty7.6</feature>
         <feature>servlet3.0</feature>
         <bundle dependency="true">mvn:org.mortbay.jetty/jetty-util/${jettyMortBay-version}</bundle>
-        <!--<bundle dependency="true">mvn:org.codehaus.groovy/groovy-all/${groovy-all.version}</bundle>-->
+        <bundle dependency="true">mvn:org.codehaus.groovy/groovy-all/${groovy.version}</bundle>
         <bundle dependency="true">mvn:org.codehaus.jackson/jackson-jaxrs/${jackson.version}</bundle>
         
         <!-- Atmosphere Runtime -->

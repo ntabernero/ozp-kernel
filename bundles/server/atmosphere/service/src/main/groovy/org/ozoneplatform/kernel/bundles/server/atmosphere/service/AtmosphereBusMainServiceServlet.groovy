@@ -87,7 +87,7 @@ public class AtmosphereBusMainServiceServlet extends AtmosphereServlet implement
         Dictionary props = new Hashtable();
         props.put("alias", METEOR_PUB_SUB_MAPPING);
         props.put("servlet-name", "Atmoshere Bus Servlet");
-        String[] registerServiceNames = {HttpServlet.class.getName(), AtmosphereBus.class.getName()};
+        String[] registerServiceNames = [HttpServlet.class.getName(), AtmosphereBus.class.getName()];
         bundleContext.registerService(registerServiceNames, this, props);
 
         loggerService = new LoggerService(AtmosphereBusMainServiceServlet.class, bundleContext);
@@ -98,7 +98,6 @@ public class AtmosphereBusMainServiceServlet extends AtmosphereServlet implement
     public void destroy(){
         removeAtmosphereHandler(PUB_SUB_INNER_MAPPING);
         interceptors.clear();
-        loggerService.log(LogService.LOG_INFO, "[AtmosphereBus]: Stopped '" + AtmosphereBusMainServiceServlet.class.getName() + "' {} " + METEOR_PUB_SUB_MAPPING);
         super.destroy();
     }
 

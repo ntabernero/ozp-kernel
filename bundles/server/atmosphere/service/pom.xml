@@ -73,11 +73,31 @@
             <version>${geronimo3.servlet.version}</version>
         </dependency>
 
-        <!-- <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <version>${servlet.api.version}</version>
-        </dependency>-->
+        <dependency>
+            <groupId>org.codehaus.gmaven.runtime</groupId>
+            <artifactId>gmaven-runtime-2.0</artifactId>
+            <version>1.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
+            <version>${groovy.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junitVersion}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.spockframework</groupId>
+            <artifactId>spock-core</artifactId>
+            <version>${spock.version}</version>
+            <scope>test</scope>
+        </dependency>
+
 
     </dependencies>
 
@@ -100,6 +120,24 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.gmaven</groupId>
+                <artifactId>gmaven-plugin</artifactId>
+                <version>1.4</version>
+                <configuration>
+                    <providerSelection>2.0</providerSelection>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                            <goal>testCompile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
             <!-- Build OSGi Bundle -->
             <plugin>
                 <groupId>org.apache.felix</groupId>
@@ -127,12 +165,33 @@
                             org.apache.coyote*;resolution:=optional,
                             org.atmosphere.cpr;version=${atmosphere.version},
                             org.atmosphere.di;version=${atmosphere.version},
+                            org.atmosphere.interceptor;version=${atmosphere.version},
+                            org.atmosphere.cache;version=${atmosphere.version},
+                            org.atmosphere.client;version=${atmosphere.version},
+                            org.atmosphere.container;version=${atmosphere.version},
+                            org.atmosphere.websocket;version=${atmosphere.version},
                             org.ozoneplatform.kernel.bundles.server.atmosphere.api*;version=${project.version},
                             javax.servlet;version="[2.6,3)",
                             *
                         </Import-Package>
                     </instructions>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.13</version>
+                <configuration>
+                    <includes>
+                        <include>**/Describe*</include>
+                    </includes>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>codenarc-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
