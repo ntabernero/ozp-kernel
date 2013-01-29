@@ -21,29 +21,18 @@
            http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
            ">
 
+    <bean id="pubSubDataImpl" class="org.ozoneplatform.kernel.bundles.server.atmosphere.service.data.PubSubDataImpl"/>
 
-    <bean id="atmosphereBusServlet" class="org.ozoneplatform.kernel.bundles.server.atmosphere.service.AtmosphereBusMainServiceServlet" scope="singleton">
+    <bean id="atmosphereBusServlet" class="org.ozoneplatform.kernel.bundles.server.atmosphere.service.AtmosphereBusMainServiceServlet"
+          scope="singleton">
         <property name="bundleContext" ref="blueprintBundleContext"/>
+        <property name="pubSubData" ref="pubSubDataImpl"/>
     </bean>
 
-    <!--<service id="atmosphereBusServletService" auto-export="interfaces" ref="atmosphereBusServlet">
-        <service-properties>
-            <entry key="alias" value="/pubsub"/>
-            <entry key="contextId" value="pubsub"/>
-            <entry key="servlet-name" value="Atmoshere Bus Servlet"/>
-            <entry key="org.atmosphere.useNative" value="true" />    -->
-            <!--<entry key="org.atmosphere.cpr.CometSupport" value="JettyAsyncSupportWithWebSocket"/> -->
-       <!-- </service-properties>
-    </service>  -->
+    <service id="atmosphereBusServletService" ref="atmosphereBusServlet"
+             interface="org.ozoneplatform.kernel.bundles.server.atmosphere.api.AtmosphereBus"/>
 
-    <!-- <service id="atmosphereBusHandlerService" interface="javax.servlet.http.HttpServlet" depends-on="atmosphereBusService">
-        <service-properties>
-            <entry key="alias" value="/pubsub"/>
-            <entry key="servlet-name" value="MeteorServlet"/>
-            <entry key="org.atmosphere.servlet" value="org.ozoneplatform.kernel.bundles.server.atmosphere.service.handler.servlet.AtmosphereBusHandlerServlet" />
-            <entry key="contextId" value="pubsub"/>
-        </service-properties>
-        <bean class="org.atmosphere.cpr.MeteorServlet"/>
-    </service> -->
+    <service id="pubSubDataService" ref="pubSubDataImpl"
+             interface="org.ozoneplatform.kernel.bundles.server.atmosphere.api.data.PubSubData"/>
 
 </blueprint>

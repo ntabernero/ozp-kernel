@@ -29,6 +29,7 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
 import org.osgi.service.log.LogService;
 import org.ozoneplatform.kernel.bundles.server.atmosphere.api.AtmosphereBus;
+import org.ozoneplatform.kernel.bundles.server.atmosphere.api.data.PubSubData;
 import org.ozoneplatform.kernel.bundles.server.atmosphere.service.handler.servlet.AtmosphereBusHandlerServlet;
 import org.ozoneplatform.kernel.bundles.server.atmosphere.service.util.LoggerService;
 
@@ -59,12 +60,22 @@ public class AtmosphereBusMainServiceServlet extends AtmosphereServlet implement
 
     protected AtmosphereBusHandlerServlet atmosphereBusHandlerServlet;
 
-    private final List<AtmosphereInterceptor> interceptors = new ArrayList<AtmosphereInterceptor>();
-    
-    private final List<String> mappings = new ArrayList<String>();
+    protected final List<AtmosphereInterceptor> interceptors = new ArrayList<AtmosphereInterceptor>();
+
+    protected final List<String> mappings = new ArrayList<String>();
+
+    protected PubSubData pubSubData;
 
     public AtmosphereBusMainServiceServlet() {
         super(false);
+    }
+
+     public PubSubData getPubSubData() {
+        return pubSubData;
+    }
+
+    public void setPubSubData(PubSubData pubSubData) {
+        this.pubSubData = pubSubData;
     }
 
     public BundleContext getBundleContext() {
@@ -158,8 +169,9 @@ public class AtmosphereBusMainServiceServlet extends AtmosphereServlet implement
 
         if (message != null && message.indexOf("message") != -1) {
             loggerService.log(LogService.LOG_INFO, "[MeteorPubSub]: Published : Broadcast to '" + b.toString() + "' { with Message }: " + message);
-            DefaultPubSubData defaultPubSubData = new DefaultPubSubData(author, message.substring("message=".length()));
-            b.broadcast(mapper.writeValueAsString(defaultPubSubData));
+            pubSubData.setAuthor(author);
+            pubSubData.setMessage(message.substring("message=".length()));
+            b.broadcast(mapper.writeValueAsString(pubSubData));
         }
     }
 
@@ -187,48 +199,6 @@ public class AtmosphereBusMainServiceServlet extends AtmosphereServlet implement
      */
     private String constructMapping(String hMapping){
         return (METEOR_PUB_SUB_MAPPING.equals("/") ? "" : METEOR_PUB_SUB_MAPPING) + (hMapping.startsWith("/") ? hMapping : "/" + hMapping);
-    }
-
-    public final static class DefaultPubSubData {
-
-        private String message;
-        private String author;
-        private long time;
-
-        public DefaultPubSubData() {
-            this("", "");
-        }
-
-        public DefaultPubSubData(String author, String message) {
-            this.author = author;
-            this.message = message;
-            this.time = new Date().getTime();
-        }
-
-        public String getMessage() {
-            return message;
-        }
-
-        public String getAuthor() {
-            return author;
-        }
-
-        public void setAuthor(String author) {
-            this.author = author;
-        }
-
-        public void setMessage(String message) {
-            this.message = message;
-        }
-
-        public long getTime() {
-            return time;
-        }
-
-        public void setTime(long time) {
-            this.time = time;
-        }
-
     }
 
     // ----------------------------

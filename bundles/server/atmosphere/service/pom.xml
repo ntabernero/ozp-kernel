@@ -112,12 +112,9 @@
                         <supportedProjectType>bundle</supportedProjectType>
                     </supportedProjectTypes>
                     <instructions>
-                        <!--<Web-ContextPath>/pubsubservice</Web-ContextPath>-->
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Export-Package>
-                            org.ozoneplatform.kernel.bundles.server.atmosphere.service.handler.servlet;version=${project.version},
-                            org.ozoneplatform.kernel.bundles.server.atmosphere.service;version=${project.version},
-                            org.ozoneplatform.kernel.bundles.server.atmosphere.service.util;version=${project.version}
+                            org.ozoneplatform.kernel.bundles.server.atmosphere.service*;version=${project.version}
                         </Export-Package>
                         <Import-Package>
                             com.sun*;resolution:=optional,
@@ -130,12 +127,10 @@
                             org.apache.coyote*;resolution:=optional,
                             org.atmosphere.cpr;version=${atmosphere.version},
                             org.atmosphere.di;version=${atmosphere.version},
-                            org.ozoneplatform.kernel.bundles.server.atmosphere.api;version=${project.version},
+                            org.ozoneplatform.kernel.bundles.server.atmosphere.api*;version=${project.version},
                             javax.servlet;version="[2.6,3)",
                             *
                         </Import-Package>
-                        <!--give files in this project precedence by listing src/main/webapp last-->
-                        <!--<_wab>src/main/webapp/</_wab>-->
                     </instructions>
                 </configuration>
             </plugin>

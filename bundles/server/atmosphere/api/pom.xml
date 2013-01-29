@@ -45,7 +45,7 @@
                     <instructions>
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Export-Package>
-                            org.ozoneplatform.kernel.bundles.server.atmosphere.api;
+                            org.ozoneplatform.kernel.bundles.server.atmosphere.api*;
                             version=${project.version}
                         </Export-Package>
                         <Import-Package>
