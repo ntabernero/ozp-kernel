@@ -59,4 +59,8 @@ logs/*
 
 # Maven files
 ######################
+pom.xml.next
 pom.xml.releaseBackup
+pom.xml.tag
+release-pom.xml
+release.properties
