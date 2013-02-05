@@ -17,21 +17,7 @@
 #
 ################################################################################
 
-respectStartLvlDuringFeatureStartup=false
-
-#
-# Comma separated list of features repositories to register by default
-#
-featuresRepositories=\
-		mvn:org.apache.karaf.assemblies.features/standard/${karaf.version}/xml/features,\
-		mvn:org.apache.karaf.assemblies.features/enterprise/${karaf.version}/xml/features,\
-		mvn:org.apache.cxf.karaf/apache-cxf/${cxf.version}/xml/features,\
-		mvn:org.ozoneplatform.kernel/features/${project.version}/xml/features,\
-        mvn:org.ozoneplatform.owf/features/${project.version}/xml/features
-
-#
-# Comma separated list of features to install at startup
-#
-featuresBoot=config,ssh,management,kar,\
-karaf-framework,http,jetty,\
-war,webconsole,cxf,owf
+This directory is the Java endorsed directory.
+Any jar in this folder will be used to override classes defined by the JVM.
+For more information, see:
+   http://download.oracle.com/javase/6/docs/technotes/guides/standards/

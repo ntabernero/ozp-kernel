@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assembly>
+    <id>ozone-kernel-enterprise</id>
+
+    <formats>
+        <format>jar</format>        <!-- SMX4-775: Added JAR assembly for *nix systems without GNU TAR  -->
+        <format>tar.gz</format>
+    </formats>
+
+    <baseDirectory>ozone-kernel-enterprise-${version}</baseDirectory>
+
+    <componentDescriptors>
+        <componentDescriptor>target/shared/common-bin.xml</componentDescriptor>
+        <componentDescriptor>target/shared/common-unix-bin.xml</componentDescriptor>
+        <!--<componentDescriptor>target/shared/examples-unix-bin.xml</componentDescriptor>-->
+    </componentDescriptors>
+
+</assembly>

@@ -2,13 +2,13 @@
 
 <features name="org.ozoneplatform.kernel.features-repo">
 
-	<feature name="servlet3.0" version="${project.version}" description="Servlet 3.0 Features">
+	<!--<feature name="servlet3.0" version="${project.version}" description="Servlet 3.0 Features">
 		<bundle>mvn:org.apache.geronimo.specs/geronimo-servlet_3.0_spec/${geronimo3.servlet.version}</bundle>
-    </feature>
+	</feature>-->
 
-    <feature name="jetty7.6" version="${project.version}" description="Custom Jetty 7.6 Features">
+    <!--<feature name="jetty7.6" version="${project.version}" description="Custom Jetty 7.6 Features"> -->
         <!-- core -->
-        <bundle>mvn:org.eclipse.jetty/jetty-client/${jetty7.6-version}</bundle>
+        <!--<bundle>mvn:org.eclipse.jetty/jetty-client/${jetty7.6-version}</bundle>
         <bundle>mvn:org.eclipse.jetty/jetty-server/${jetty7.6-version}</bundle>
         <bundle>mvn:org.eclipse.jetty/jetty-util/${jetty7.6-version}</bundle>
         <bundle>mvn:org.eclipse.jetty/jetty-continuation/${jetty7.6-version}</bundle>
@@ -24,16 +24,17 @@
         <bundle>mvn:org.eclipse.jetty/jetty-jmx/${jetty7.6-version}</bundle>
         <bundle>mvn:org.eclipse.jetty/jetty-jndi/${jetty7.6-version}</bundle>
         <bundle>mvn:org.eclipse.jetty/jetty-ajp/${jetty7.6-version}</bundle>
-    </feature>
+    </feature>-->
     
     <feature name="atmosphere-runtime-framework" version="${project.version}" 
     	description="Atmosphere Runtime (${atmosphere.version}) Framework Feature">
         <!-- Dependencies -->
         <feature>cxf</feature>
-        <feature>jetty7.6</feature>
-        <feature>servlet3.0</feature>
+        <feature>jetty</feature>
+        <!--<feature>servlet3.0</feature>-->
         <bundle dependency="true">mvn:org.mortbay.jetty/jetty-util/${jettyMortBay-version}</bundle>
         <bundle dependency="true">mvn:org.codehaus.groovy/groovy-all/${groovy.version}</bundle>
+        <bundle dependency="true">mvn:org.codehaus.jackson/jackson/${jackson.version}</bundle>
         <bundle dependency="true">mvn:org.codehaus.jackson/jackson-jaxrs/${jackson.version}</bundle>
         
         <!-- Atmosphere Runtime -->

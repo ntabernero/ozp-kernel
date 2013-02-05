@@ -24,7 +24,7 @@
         <jetty.port>8080</jetty.port>
         <maven-jetty-plugin.version>6.1.26</maven-jetty-plugin.version>
 
-        <appendedResourcesDirectory>${basedir}/../../etc/appended-resources</appendedResourcesDirectory>
+        <appendedResourcesDirectory>${basedir}/../distribution/etc/appended-resources</appendedResourcesDirectory>
     </properties>
 
     <dependencies>
@@ -47,8 +47,8 @@
             <artifactId>org.apache.karaf.jaas.boot</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.apache.karaf</groupId>
-            <artifactId>apache-karaf</artifactId>
+            <groupId>org.ozoneplatform.kernel.distribution</groupId>
+            <artifactId>enterprise</artifactId>
             <type>zip</type>
             <scope>provided</scope>
         </dependency>
@@ -59,24 +59,24 @@
         </dependency>
 
         <!--Xerces jar to be included in lib/endorsed -->
-        <dependency>
+        <!-- <dependency>
             <groupId>org.apache.xerces</groupId>
             <artifactId>xml-apis</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.xerces</groupId>
             <artifactId>xercesImpl</artifactId>
-        </dependency>
+        </dependency> -->
 
         <!--xalan jar to be included in lib/endorsed-->
-        <dependency>
+        <!-- <dependency>
             <groupId>xalan</groupId>
             <artifactId>xalan</artifactId>
         </dependency>
         <dependency>
             <groupId>xalan</groupId>
             <artifactId>serializer</artifactId>
-        </dependency>
+        </dependency> -->
 
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
@@ -184,7 +184,7 @@
                         <configuration>
                             <tasks>
                                 <move todir="${project.build.directory}/karaf/WEB-INF/karaf">
-                                    <fileset dir="${project.build.directory}/karaf/WEB-INF/ozone-kernel-enterprise-${project.version}" />
+                                    <fileset dir="${project.build.directory}/karaf/WEB-INF/enterprise-${project.version}" />
                                 </move>
                             </tasks>
                         </configuration>
