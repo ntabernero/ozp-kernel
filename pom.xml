@@ -19,10 +19,11 @@
     <description>see README.md</description>
     
     <scm>
-        <connection>scm:git:https://www.owfgoss.org/git/repos/kernel.git</connection>
-        <developerConnection>scm:git:https://www.owfgoss.org/git/repos/kernel.git</developerConnection>
-        <url>https://www.owfgoss.org/crucible/browse/kernel/</url>
+        <connection>scm:git:https://www.owfgoss.org/git/repos/ozp-kernel.git</connection>
+        <developerConnection>scm:git:https://www.owfgoss.org/git/repos/ozp-kernel.git</developerConnection>
+        <url>https://www.owfgoss.org/crucible/browse/ozp-kernel/</url>
     </scm>
+    
     
     <issueManagement>
         <system>jira</system>
