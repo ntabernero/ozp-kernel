@@ -612,12 +612,30 @@
                             <descriptors>
                               <descriptor>mvn:org.apache.karaf.assemblies.features/standard/${karaf.version}/xml/features</descriptor>
                               <descriptor>mvn:org.apache.karaf.assemblies.features/enterprise/${karaf.version}/xml/features</descriptor>
+                              <descriptor>mvn:org.apache.cxf.karaf/apache-cxf/${cxf.version}/xml/features</descriptor>
+                              <descriptor>mvn:org.ozoneplatform.commons/features/${project.version}/xml/features</descriptor>
+                              <descriptor>mvn:org.ozoneplatform.kernel/features/${project.version}/xml/features</descriptor>
+                              <descriptor>mvn:org.ozoneplatform.owf/features/${project.version}/xml/features</descriptor>
                             </descriptors>
                             <features>
                                 <feature>config</feature>
                                 <feature>ssh</feature>
                                 <feature>management</feature>
 				                <feature>wrapper</feature>
+				                
+				                <feature>kar</feature>
+				                <feature>karaf-framework</feature>
+				                <feature>http</feature>
+				                <feature>jetty</feature>
+				                
+				                <feature>war</feature>
+				                <feature>webconsole</feature>
+				                <feature>cxf</feature>
+				                <feature>ozone-commons-server</feature>
+				                <feature>servlet3.0</feature>
+				                <feature>atmospherebus</feature>
+				                <feature>bundletracker</feature>
+				                <feature>owf</feature>
                             </features>
                             <includeMvnBasedDescriptors>true</includeMvnBasedDescriptors>
                             <repository>target/features-repo</repository>
