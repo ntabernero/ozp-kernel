@@ -108,7 +108,7 @@
             </plugin>
 
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
+                <groupId>org.ozoneplatform.commons.vendor</groupId>
                 <artifactId>codenarc-maven-plugin</artifactId>
             </plugin>
         </plugins>
