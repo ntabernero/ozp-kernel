@@ -143,7 +143,17 @@
                             <goal>attached</goal> 
                         </goals> 
                     </execution> 
-                </executions>         
+                    <execution>
+                        <id>make-assembly-shortname</id>
+                        <phase>package</phase>
+                        <configuration>
+                            <finalName>ozoneplatform-kernel</finalName>
+                        </configuration>
+                        <goals>
+                            <goal>attached</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin> 
         </plugins>
     </build>
