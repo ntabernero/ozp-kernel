@@ -612,6 +612,7 @@
                             <descriptors>
                               <descriptor>mvn:org.apache.karaf.assemblies.features/standard/${karaf.version}/xml/features</descriptor>
                               <descriptor>mvn:org.apache.karaf.assemblies.features/enterprise/${karaf.version}/xml/features</descriptor>
+                              <descriptor>mvn:org.fusesource.fabric/fuse-fabric/${fuse.version}/xml/features</descriptor>
                               <descriptor>mvn:org.apache.cxf.karaf/apache-cxf/${cxf.version}/xml/features</descriptor>
                               <descriptor>mvn:org.ozoneplatform.commons/features/${project.version}/xml/features</descriptor>
                               <descriptor>mvn:org.ozoneplatform.kernel/features/${project.version}/xml/features</descriptor>
@@ -627,6 +628,11 @@
 				                <feature>karaf-framework</feature>
 				                <feature>http</feature>
 				                <feature>jetty</feature>
+				                
+				                <feature>fabric-boot-commands</feature>
+				                <feature>jasypt-encryption</feature>
+								<feature>fabric-bundle</feature>
+								<feature>fabric-maven-proxy</feature>
 				                
 				                <feature>war</feature>
 				                <feature>webconsole</feature>

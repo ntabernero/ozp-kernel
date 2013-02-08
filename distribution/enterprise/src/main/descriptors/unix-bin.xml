@@ -56,6 +56,10 @@
                 <include>admin</include>
                 <include>shell</include>
                 <include>client</include>
+                <!-- include windows files too -->
+                <include>admin.bat</include>
+                <include>shell.bat</include>
+                <include>client.bat</include>
             </includes>
         </fileSet>
         <fileSet>

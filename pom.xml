@@ -48,6 +48,7 @@
         <geronimo3.servlet.version>1.0</geronimo3.servlet.version>
         <junitVersion>4.8.1</junitVersion>
         <spock.version>0.7-groovy-2.0</spock.version>
+        <fuse.version>7.0.1.fuse-084</fuse.version>
 
         <!--  NEW PROPERTIES -->
         <aopalliance.bundle.version>1.0_6</aopalliance.bundle.version>

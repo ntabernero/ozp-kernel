@@ -54,6 +54,10 @@
                 <include>admin.bat</include>
                 <include>shell.bat</include>
                 <include>client.bat</include>
+                <!-- include unix files too -->
+                <include>admin</include>
+                <include>shell</include>
+                <include>client</include>
             </includes>
         </fileSet>
         <fileSet>
