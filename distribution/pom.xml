@@ -37,7 +37,7 @@
         <module>ozp_kernel_branding</module>
         <module>base</module>
         <module>enterprise</module>
-        <!--<module>ozp_kernel_itests</module> -->
+        <!--<module>ozp_kernel_itests</module>-->
     </modules>
 
     <build>
