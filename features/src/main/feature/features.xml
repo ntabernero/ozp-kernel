@@ -2,7 +2,7 @@
 
 <features name="org.ozoneplatform.kernel.features-repo">
 
-	<feature name="servlet3.0" version="${project.version}" description="Servlet 3.0 Features">
+    <feature name="servlet3.0" version="${project.version}" description="Servlet 3.0 Features">
 		<bundle>mvn:org.apache.geronimo.specs/geronimo-servlet_3.0_spec/${geronimo3.servlet.version}</bundle>
 	</feature>
 

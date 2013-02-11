@@ -49,34 +49,43 @@
         <dependency>
             <groupId>org.ozoneplatform.kernel.distribution</groupId>
             <artifactId>enterprise</artifactId>
+            <version>${project.version}</version>
             <type>zip</type>
             <scope>provided</scope>
         </dependency>
+        <!-- branding -->
+        <dependency>
+            <groupId>org.ozoneplatform.kernel.distribution</groupId>
+            <artifactId>ozp_kernel_branding</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.apache.geronimo.specs</groupId>
             <artifactId>geronimo-servlet_2.5_spec</artifactId>
+            <version>${geronimo-servlet.version}</version>
             <scope>provided</scope>
         </dependency>
 
         <!--Xerces jar to be included in lib/endorsed -->
-        <!-- <dependency>
+       <dependency>
             <groupId>org.apache.xerces</groupId>
             <artifactId>xml-apis</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.xerces</groupId>
             <artifactId>xercesImpl</artifactId>
-        </dependency> -->
+        </dependency>
 
         <!--xalan jar to be included in lib/endorsed-->
-        <!-- <dependency>
+        <dependency>
             <groupId>xalan</groupId>
             <artifactId>xalan</artifactId>
         </dependency>
         <dependency>
             <groupId>xalan</groupId>
             <artifactId>serializer</artifactId>
-        </dependency> -->
+        </dependency>
 
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
@@ -184,7 +193,7 @@
                         <configuration>
                             <tasks>
                                 <move todir="${project.build.directory}/karaf/WEB-INF/karaf">
-                                    <fileset dir="${project.build.directory}/karaf/WEB-INF/enterprise-${project.version}" />
+                                    <fileset dir="${project.build.directory}/karaf/WEB-INF/ozone-kernel-enterprise-${project.version}" />
                                 </move>
                             </tasks>
                         </configuration>
