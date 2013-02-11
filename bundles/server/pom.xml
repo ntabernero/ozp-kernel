@@ -5,6 +5,7 @@
         <groupId>org.ozoneplatform.kernel.bundles</groupId>
         <artifactId>bundles</artifactId>
         <version>8.0.0-ALPHA-SPRINT3-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <groupId>org.ozoneplatform.kernel.bundles.server</groupId>

@@ -4,6 +4,7 @@
         <artifactId>server</artifactId>
         <groupId>org.ozoneplatform.kernel.bundles.server</groupId>
         <version>8.0.0-ALPHA-SPRINT3-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -12,6 +13,7 @@
     <packaging>pom</packaging>
 
     <name>${atmospherebus.description}</name>
+    <description>${atmospherebus.description}</description>
 
     <modules>
         <module>api</module>
