@@ -23,13 +23,13 @@
     <parent>
         <groupId>org.ozoneplatform</groupId>
         <artifactId>ozoneplatform</artifactId>
-        <version>8.0.0-ALPHA-SPRINT3-SNAPSHOT</version>
+        <version>8.0.0-ALPHA-SPRINT3</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <groupId>org.ozoneplatform.kernel</groupId>
     <artifactId>kernel</artifactId>
-    <version>8.0.0-ALPHA-SPRINT3-SNAPSHOT</version>
+    <version>8.0.0-ALPHA-SPRINT3</version>
     <packaging>pom</packaging>
 
     <name>Kernel Parent Project</name>

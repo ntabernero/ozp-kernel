@@ -22,13 +22,13 @@
     <parent>
         <groupId>org.ozoneplatform.kernel.distribution</groupId>
         <artifactId>base</artifactId>
-        <version>8.0.0-ALPHA-SPRINT3-SNAPSHOT</version>
+        <version>8.0.0-ALPHA-SPRINT3</version>
         <relativePath>../base/pom.xml</relativePath>
     </parent>
 
     <groupId>org.ozoneplatform.kernel.distribution</groupId>
     <artifactId>enterprise</artifactId>
-    <version>8.0.0-ALPHA-SPRINT3-SNAPSHOT</version>
+    <version>8.0.0-ALPHA-SPRINT3</version>
     <packaging>pom</packaging>
     <name>Ozone :: Kernel :: Distribution :: Kernel Enterprise</name>
     <description>

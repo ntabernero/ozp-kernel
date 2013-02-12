@@ -6,13 +6,13 @@
     <parent>
         <groupId>org.ozoneplatform.kernel</groupId>
         <artifactId>kernel</artifactId>
-        <version>8.0.0-ALPHA-SPRINT3-SNAPSHOT</version>
+        <version>8.0.0-ALPHA-SPRINT3</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <groupId>org.ozoneplatform.kernel.deployment</groupId>
     <artifactId>deployment</artifactId>
-    <version>8.0.0-ALPHA-SPRINT3-SNAPSHOT</version>
+    <version>8.0.0-ALPHA-SPRINT3</version>
     <name>Ozone :: Kernel :: Kernel Deployment Module</name>
     <packaging>pom</packaging>
 

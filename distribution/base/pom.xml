@@ -21,13 +21,13 @@
     <parent>
         <groupId>org.ozoneplatform.kernel.distribution</groupId>
         <artifactId>distribution</artifactId>
-        <version>8.0.0-ALPHA-SPRINT3-SNAPSHOT</version>
+        <version>8.0.0-ALPHA-SPRINT3</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <groupId>org.ozoneplatform.kernel.distribution</groupId>
     <artifactId>base</artifactId>
-    <version>8.0.0-ALPHA-SPRINT3-SNAPSHOT</version>
+    <version>8.0.0-ALPHA-SPRINT3</version>
     <packaging>pom</packaging>
     <name>Ozone :: Kernel :: Distribution :: Kernel Base</name>
     <description>
@@ -353,22 +353,20 @@
                         </goals>
                         <configuration>
                             <target name="enable-obr">
-                                <echo message="Updating etc/startup.properties in unix assembly"/>
-                                <concat destfile="target/dependencies/unix/fuse-fabric-${fuse.version}/etc/startup.properties"
-                                        append="true" eol="unix">
+                                <echo message="Updating etc/startup.properties in unix assembly" />
+                                <concat destfile="target/dependencies/unix/fuse-fabric-${fuse.version}/etc/startup.properties" append="true" eol="unix">
                                     <fileset file="target/shared/startup-obr.properties" />
                                 </concat>
-                                <echo message="Updating etc/startup.properties in windows assembly"/>
-                                <concat destfile="target/dependencies/win/fuse-fabric-${fuse.version}/etc/startup.properties"
-                                        append="true" eol="dos">
+                                <echo message="Updating etc/startup.properties in windows assembly" />
+                                <concat destfile="target/dependencies/win/fuse-fabric-${fuse.version}/etc/startup.properties" append="true" eol="dos">
                                     <fileset file="target/shared/startup-obr.properties" />
                                 </concat>
                                 <echo message="Fixing start/stop scripts in windows assembly" />
-                                <replace file="target/dependencies/win/fuse-fabric-${fuse.version}/bin/start.bat" token="fusefabric.bat" value="fuseesb.bat"/>
-                                <replace file="target/dependencies/win/fuse-fabric-${fuse.version}/bin/stop.bat" token="fusefabric.bat" value="fuseesb.bat"/>
+                                <replace file="target/dependencies/win/fuse-fabric-${fuse.version}/bin/start.bat" token="fusefabric.bat" value="fuseesb.bat" />
+                                <replace file="target/dependencies/win/fuse-fabric-${fuse.version}/bin/stop.bat" token="fusefabric.bat" value="fuseesb.bat" />
                                 <echo message="Fixing start/stop scripts in unix assembly" />
-                                <replace file="target/dependencies/unix/fuse-fabric-${fuse.version}/bin/start" token="bin/fusefabric" value="bin/fuseesb"/>
-                                <replace file="target/dependencies/unix/fuse-fabric-${fuse.version}/bin/stop" token="bin/fusefabric" value="bin/fuseesb"/>
+                                <replace file="target/dependencies/unix/fuse-fabric-${fuse.version}/bin/start" token="bin/fusefabric" value="bin/fuseesb" />
+                                <replace file="target/dependencies/unix/fuse-fabric-${fuse.version}/bin/stop" token="bin/fusefabric" value="bin/fuseesb" />
                             </target>
                         </configuration>
                     </execution>
