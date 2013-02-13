@@ -4,13 +4,13 @@
     <parent>
         <groupId>org.ozoneplatform.kernel.bundles</groupId>
         <artifactId>bundles</artifactId>
-        <version>8.0.0-ALPHA-SPRINT3-SNAPSHOT</version>
+        <version>8.0.0-ALPHA-SPRINT4-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <groupId>org.ozoneplatform.kernel.bundles.server</groupId>
     <artifactId>server</artifactId>
-    <version>8.0.0-ALPHA-SPRINT3-SNAPSHOT</version>
+    <version>8.0.0-ALPHA-SPRINT4-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Ozone Platform :: Kernel :: Bundles :: Server</name>
