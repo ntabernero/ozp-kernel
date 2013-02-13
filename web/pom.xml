@@ -67,24 +67,26 @@
             <scope>provided</scope>
         </dependency>
 
-        <!--Xerces jar to be included in lib/endorsed -->
        <dependency>
             <groupId>org.apache.xerces</groupId>
             <artifactId>xml-apis</artifactId>
+             <version>${xml.api.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.xerces</groupId>
             <artifactId>xercesImpl</artifactId>
+            <version>${xerces.version}</version>
         </dependency>
 
-        <!--xalan jar to be included in lib/endorsed-->
         <dependency>
             <groupId>xalan</groupId>
             <artifactId>xalan</artifactId>
+            <version>${xalan.version}</version>
         </dependency>
         <dependency>
             <groupId>xalan</groupId>
             <artifactId>serializer</artifactId>
+            <version>${xalan.version}</version>
         </dependency>
 
         <dependency>
