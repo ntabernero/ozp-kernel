@@ -645,6 +645,31 @@
     </repositories>
 
     <pluginRepositories>
+        <!--these need to be here if build with out the ozoneplatform parent project-->
+        <pluginRepository>
+            <id>ozone.release.plugin</id>
+            <name>Ozone Community Release Repository</name>
+            <url>https://www.owfgoss.org/nexus/content/repositories/releases</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </pluginRepository>
+        <pluginRepository>
+            <id>ozone.snapshot.plugin</id>
+            <name>Ozone Community Snapshot Repository</name>
+            <url>https://www.owfgoss.org/nexus/content/repositories/snapshots</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </pluginRepository>
+        <!--these need to be here if build with out the ozoneplatform parent project-->
+
         <pluginRepository>
             <id>fusesource.nexus.m2-snapshot</id>
             <name>FuseSource Community Snapshot Repository</name>
