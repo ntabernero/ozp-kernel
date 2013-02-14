@@ -23,13 +23,13 @@
     <parent>
         <groupId>org.ozoneplatform.kernel.distribution</groupId>
         <artifactId>distribution</artifactId>
-        <version>8.0.0-ALPHA-SPRINT3-SNAPSHOT</version>
+        <version>8.0.0-ALPHA-SPRINT4-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <groupId>org.ozoneplatform.kernel.distribution</groupId>
     <artifactId>ozp_kernel_itests</artifactId>
-    <version>8.0.0-ALPHA-SPRINT3-SNAPSHOT</version>
+    <version>8.0.0-ALPHA-SPRINT4-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Ozone :: Kernel :: Distribution :: Kernel Integration Tests</name>
     <description>
