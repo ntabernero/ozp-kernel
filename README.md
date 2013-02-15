@@ -1,29 +1,17 @@
-Kernel
+Ozone Kernel
 ======================
 
-Initial Setup
--------------
+This is the Kernel module of the Ozone Platform.  It is a sub-module of the ozoneplatform project.
+It packages OSGI bundles from other sub-modules into a runnable container.  The easiest way to build and work with this
+is to get the entire ozoneplatform project, https://github.com/ozoneplatform/ozoneplatform.git, and follow
+that project's README.md for building and running the system.
 
-1. Install J2SE 6.0 SDK (or later), which can be downloaded from 
-   http://www.oracle.com/technetwork/java/javasebusiness/downloads/java-archive-downloads-javase6-419409.html
-   Use version of "JDK 6.0 Update 29" (or later).
+If you have a specific need and you understand the technical ramifications, you can build just this sub-module.
+* Install all the prerequisites mentioned in the ozoneplatform project's README.md.
+* Run `mvn clean install`
 
-2. Make sure that your JAVA_HOME environment variable is set to the newly installed 
-   JDK location, and that your PATH includes %JAVA_HOME%\bin (windows) or 
-   $JAVA_HOME$/bin (unix).
-
-3. Install Maven 3.0.3 (or later), which can be downloaded from 
-   http://maven.apache.org/download.html. Make sure that your PATH includes 
-   the MVN_HOME/bin directory. 
-
-4. Be sure to give Maven enough memory `MAVEN_OPTS=-Xmx512m -XX:MaxPermSize=128m`
-   
-
-Building
---------
-1. Run `mvn clean install` from the root folder
-
-Running
---------
-1.
+This will collect OSGI bundles available on OWF's Nexus repository and package them into a runnable container.
+To run the container
+* Unpack the zip file kernel/deployment/target/deployment-XXX.zip
+* Run deployment-XXX/apache-tomcat-7.0.32/start.bat
 
