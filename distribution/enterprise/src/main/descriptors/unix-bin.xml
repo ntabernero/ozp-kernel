@@ -31,7 +31,7 @@
         <componentDescriptor>target/shared/common-unix-bin.xml</componentDescriptor>
     </componentDescriptors>
 
-    <files>
+    <!--<files>
         <file>
             <source>${basedir}/target/dependencies/unix/apache-camel-${camel.version}.tar.gz</source>
             <outputDirectory>extras</outputDirectory>
@@ -42,6 +42,6 @@
             <outputDirectory>extras</outputDirectory>
             <fileMode>0644</fileMode>
         </file>
-    </files>
+    </files>-->
 
 </assembly>

@@ -30,7 +30,7 @@
         <componentDescriptor>target/shared/common-windows-bin.xml</componentDescriptor>
     </componentDescriptors>
 
-    <files>
+    <!--<files>
         <file>
             <source>${basedir}/target/dependencies/win/apache-camel-${camel.version}.zip</source>
             <outputDirectory>extras</outputDirectory>
@@ -39,6 +39,6 @@
             <source>${basedir}/target/dependencies/win/apache-cxf-${cxf.version}.zip</source>
             <outputDirectory>extras</outputDirectory>
         </file>
-    </files>
+    </files>-->
 
 </assembly>
