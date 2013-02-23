@@ -1,4 +1,4 @@
-Ozone Kernel
+Ozone Kernel [![Build Status](https://travis-ci.org/ntabernero/ozp-kernel.png)](https://travis-ci.org/ntabernero/ozp-kernel)
 ======================
 
 This is the Kernel module of the Ozone Platform.  It is a sub-module of the ozoneplatform project.
